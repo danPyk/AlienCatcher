@@ -1,0 +1,2 @@
+# BeerRandom
+Simple game
