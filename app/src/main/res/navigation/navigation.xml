@@ -7,7 +7,7 @@
     app:startDestination="@id/menuFragment2">
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.whayway.beerrandom.GameFragment"
+        android:name="com.whayway.beerrandom.game.GameFragment"
         android:label="GameFragment" >
         <action
             android:id="@+id/action_gameFragment_to_resultFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/menuFragment2"
-        android:name="com.whayway.beerrandom.MenuFragment"
+        android:name="com.whayway.beerrandom.fragments.MenuFragment"
         android:label="MenuFragment" >
         <action
             android:id="@+id/action_menuFragment2_to_entranceFragment2"
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.whayway.beerrandom.ResultFragment"
+        android:name="com.whayway.beerrandom.fragments.ResultFragment"
         android:label="ResultFragment" >
         <argument
             android:name="score"
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
-        android:name="com.whayway.beerrandom.InstructionFragment"
+        android:name="com.whayway.beerrandom.fragments.InstructionFragment"
         android:label="InstructionFragment" >
         <action
             android:id="@+id/action_instructionFragment_to_gameFragment"
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/entranceFragment"
-        android:name="com.whayway.beerrandom.EntranceFragment"
+        android:name="com.whayway.beerrandom.fragments.EntranceFragment"
         android:label="fragment_entrance"
         tools:layout="@layout/fragment_entrance" >
         <action

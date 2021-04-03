@@ -1,4 +1,4 @@
-package com.whayway.beerrandom
+package com.whayway.beerrandom.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.whayway.beerrandom.R
 import kotlinx.android.synthetic.main.fragment_instruction.*
 
 class InstructionFragment : Fragment() {

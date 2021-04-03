@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.whayway.beerrandom.GameFragmentDirections
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentGameBinding
 import kotlinx.android.synthetic.main.fragment_game.*

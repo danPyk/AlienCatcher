@@ -1,4 +1,4 @@
-package com.whayway.beerrandom
+package com.whayway.beerrandom.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
-import kotlinx.android.synthetic.main.fragment_entrance.*
+import com.whayway.beerrandom.R
 
 // TODO: Rename parameter arguments, choose names that match
 //todo zubr poszukiwanie

@@ -16,7 +16,7 @@
             app:defaultNavHost="true" />
         <fragment
         android:id="@+id/menuFragment2"
-        android:name="com.whayway.beerrandom.MenuFragment"
+        android:name="com.whayway.beerrandom.fragments.MenuFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
             />

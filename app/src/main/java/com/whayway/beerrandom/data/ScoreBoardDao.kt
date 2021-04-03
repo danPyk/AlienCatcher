@@ -1,3 +1,4 @@
+/*
 package com.whayway.beerrandom.data
 
 import androidx.lifecycle.LiveData
@@ -26,3 +27,4 @@ interface ScoreBoardDao {
     @Query("SELECT * FROM score_board_table ORDER BY scoreId DESC")
     fun getAllNights(): LiveData<List<ScoreBoard>>
 }
+*/

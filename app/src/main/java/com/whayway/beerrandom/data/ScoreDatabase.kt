@@ -1,3 +1,4 @@
+/*
 package com.whayway.beerrandom.data
 
 import android.content.Context
@@ -34,3 +35,4 @@ abstract class ScoreDatabase : RoomDatabase(){
     }
 
 }
+*/

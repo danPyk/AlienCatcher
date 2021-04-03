@@ -8,13 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import com.beta.kanyenotifications.ui.home.ResultViewModelFactory
 import com.whayway.beerrandom.R
-import com.whayway.beerrandom.ResultFragmentArgs
-import com.whayway.beerrandom.ResultFragmentDirections
-import com.whayway.beerrandom.data.ScoreBoardDao
-import com.whayway.beerrandom.data.ScoreDatabase
 
 import com.whayway.beerrandom.databinding.FragmentResultBinding
+import com.whayway.beerrandom.fragments.ResultFragmentArgs
+import com.whayway.beerrandom.fragments.ResultFragmentDirections
 
 class ResultFragment  : Fragment() {
     // private lateinit var viewModel: ResultViewModel
@@ -30,9 +29,9 @@ class ResultFragment  : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
+       // val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
 
-        val viewModelFactory = ResultViewModelFactory(dataSource!!, application)
+        val viewModelFactory = ResultViewModelFactory( application)
 
         val resultViewModel =
             ViewModelProvider(
