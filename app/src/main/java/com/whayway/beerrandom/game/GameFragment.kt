@@ -1,13 +1,15 @@
 package com.whayway.beerrandom.game
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.whayway.beerrandom.R
@@ -17,12 +19,14 @@ import kotlinx.android.synthetic.main.fragment_game.*
 
 const val KEY_SCORE = "score_key"
 
-class GameFragment : Fragment() {
+class GameFragment  : androidx.fragment.app.Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var viewModel: GameViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
@@ -31,7 +35,9 @@ class GameFragment : Fragment() {
             container,
             false
         )
+
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
+
 
         object : CountDownTimer(3000, 1000) {
              override fun onTick(p0: Long) {
@@ -48,9 +54,11 @@ class GameFragment : Fragment() {
                 }
             }
         }.start()
-        viewModel._score.observe(viewLifecycleOwner, Observer{ newScore ->
+
+        viewModel.score.observe(viewLifecycleOwner, androidx.lifecycle.Observer { newScore ->
             binding.scoreText.text = newScore.toString()
         })
+
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,15 +89,17 @@ class GameFragment : Fragment() {
         //why after adding binding here i have unresolv ref?
         btn_ok.setOnClickListener { view: View ->
             view.findNavController().navigate(
-                GameFragmentDirections.actionGameFragmentToResultFragment(
-                    viewModel.score.value ?: 0
+                GameFragmentDirections.actionGameFragmentToMyDialog(
+                    viewModel.score.value!!
                 )
             )
         }
+
         super.onViewCreated(view, savedInstanceState)
         //separate views frome data?
         setHasOptionsMenu(true)
     }
+
     private fun updateScore() {
         viewModel.increaseScore()
             //I can get rig of that, becouse LIveData ovserves and updates score

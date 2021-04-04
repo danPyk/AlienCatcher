@@ -1,4 +1,3 @@
-/*
 package com.whayway.beerrandom.data
 
 import androidx.room.ColumnInfo
@@ -11,4 +10,4 @@ data class ScoreBoard  (
 var scoreId: Int = 0,
 @ColumnInfo(name ="score_scoreboard")
 var score_board: Int = 0,
-)*/
+)

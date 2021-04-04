@@ -10,8 +10,8 @@
         android:name="com.whayway.beerrandom.game.GameFragment"
         android:label="GameFragment" >
         <action
-            android:id="@+id/action_gameFragment_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            android:id="@+id/action_gameFragment_to_myDialog"
+            app:destination="@id/myDialog" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment2"
@@ -49,4 +49,15 @@
             android:id="@+id/action_entranceFragment_to_instructionFragment"
             app:destination="@id/instructionFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/myDialog"
+        android:name="com.whayway.beerrandom.dialog.MyDialog"
+        android:label="MyDialog" >
+        <action
+            android:id="@+id/action_myDialog_to_resultFragment"
+            app:destination="@id/resultFragment" />
+        <argument
+            android:name="score"
+            app:argType="integer" />
+    </dialog>
 </navigation>

@@ -11,7 +11,6 @@ import java.util.*
 
 class GameViewModel: ViewModel() {
     lateinit var imageArray:  ArrayList<ImageView>
-    var gameFragment = GameFragment()
     //score in ensapsuleted
     var _score = MutableLiveData<Int>()
     val score: LiveData<Int>

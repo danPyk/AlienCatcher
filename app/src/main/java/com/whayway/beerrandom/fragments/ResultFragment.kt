@@ -26,8 +26,10 @@ class ResultFragment : Fragment() {
        binding.playAgainButton.setOnClickListener { view : View ->
            view.findNavController().navigate(ResultFragmentDirections.actionResultFragmentToGameFragment())
        }
+
        val args = ResultFragmentArgs.fromBundle(requireArguments())
 /*       Toast.makeText(context, "NumCorrect: ${args.score}", Toast.LENGTH_LONG).show()*/
+       binding.textView.text = args.score.toString()
        if(args.score < 15){
            binding.imageView.setImageResource(R.drawable.lech_free)
        }else if((args.score > 15) || (args.score < 30)){

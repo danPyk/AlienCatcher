@@ -14,7 +14,7 @@ import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentResultBinding
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
 import com.whayway.beerrandom.fragments.ResultFragmentDirections
-
+//todo correct back navigation
 class ResultFragment  : Fragment() {
     // private lateinit var viewModel: ResultViewModel
     // private lateinit var binding: FragmentGameBinding
