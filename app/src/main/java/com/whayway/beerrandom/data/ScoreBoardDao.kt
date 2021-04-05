@@ -1,10 +1,7 @@
 package com.whayway.beerrandom.data
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 @Dao
 interface ScoreBoardDao {
@@ -20,8 +17,9 @@ interface ScoreBoardDao {
     @Query("DELETE FROM score_board_table")
     fun clear()
     //query, return nightId 1
-    @Query("SELECT * FROM score_board_table ORDER BY scoreId DESC LIMIT 1")
-    fun getTonight(): ScoreBoard?
+/*    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
+    @Query("SELECT * FROM  score_board_table  WHERE scoreId =  ")
+    fun getTonight(): ScoreBoard*/
     //desc = descending order
     @Query("SELECT * FROM score_board_table ORDER BY scoreId DESC")
     fun getAllNights(): LiveData<List<ScoreBoard>>

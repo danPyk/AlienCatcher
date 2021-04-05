@@ -10,4 +10,7 @@ data class ScoreBoard  (
 var scoreId: Int = 0,
 @ColumnInfo(name ="score_scoreboard")
 var score_board: Int = 0,
+@ColumnInfo(name ="score_name")
+var score_name: String = "",
+
 )

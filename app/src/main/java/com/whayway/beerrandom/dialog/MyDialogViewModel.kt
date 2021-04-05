@@ -10,45 +10,20 @@ import kotlinx.coroutines.launch
 
 class MyDialogViewModel(val database: ScoreBoardDao) : ViewModel() {
 
-    init {
-    //  initializeResult().toString()
-    }
-/*    val _eventPlayAgain = MutableLiveData<Boolean>()
-    val eventPlayAgain: LiveData<Boolean>
-        get() = _eventPlayAgain*/
 
-    private var scoreResult = MutableLiveData<ScoreBoard?>()
-
-/*    private fun initializeResult() {
-        viewModelScope.launch(Dispatchers.IO) {
-            scoreResult.postValue( getScoretFromDatabase())
-        }
-    }*/
-    private suspend fun getScoretFromDatabase(): ScoreBoard? {
-        var night = database.getTonight()
-        return night
-    }
-    suspend fun callGetAllNights(){
-        val singleScore = database.getAllNights()
-    }
-    fun onStartTracking() {
+    fun onStartTracking(score: Int, name: String) {
         // launch a coroutine in the viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
-            val newScore = ScoreBoard(1, 10)
-            //THATS NOT dao FUN WITH SAME NAME
+            val newScore = ScoreBoard()
+            newScore.score_board = score
+            newScore.score_name = name
+
             insert(newScore)
-            //update tonight.
-           // scoreResult.value = getTonightFromDatabase()
+
         }
     }
     private suspend fun insert(score: ScoreBoard) {
         database.insert(score)
     }
- /*   fun onStopTracking() {
-        viewModelScope.launch {
-            val oldNight = scoreResult.value ?: return@launch
-            oldNight.endTimeMilli = System.currentTimeMillis()
-            update(oldNight)
-        }
-    }*/
+
 }

@@ -15,6 +15,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreDatabase
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
+import kotlinx.android.synthetic.main.fragment_result.*
 
 class MyDialog: DialogFragment() {
     override fun onCreateView(
@@ -22,12 +23,7 @@ class MyDialog: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.custom_popup, container, false)
-
-    }
-    companion object DB{
-        val dataSource = ScoreDatabase.getInstance(this).sleepDatabaseDao
 
     }
 
@@ -36,6 +32,7 @@ class MyDialog: DialogFragment() {
 
         val application = requireNotNull(this.activity).application
 
+        val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
         val viewModelFactory = SleepQualityViewModelFactory( dataSource!!)
 
         val sleepQualityViewModel =
@@ -54,18 +51,24 @@ class MyDialog: DialogFragment() {
                 }else{
                     //todo maybe add Loading Spinner
                     //edit
-            findNavController().navigate (
+/*            findNavController().navigate (
                 MyDialogDirections.actionMyDialogToResultFragment(
                     args.score
                 )
-            )
-                sleepQualityViewModel.onStartTracking()
+            )*/
+                sleepQualityViewModel.onStartTracking(args.score, edit)
 
             }
 
         }
+        view?.findViewById<TextView>(R.id.txtClose)?.setOnClickListener {
+          //  textView.text = dataSource.getTonight().toString()
+
+
+        }
 
     }
+
     private fun showPopUp() {
         val coordinatorLayout =
             requireView().findViewById(R.id.linerar_layout) as LinearLayout
