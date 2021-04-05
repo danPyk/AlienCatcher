@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_menuFragment2_to_entranceFragment2"
             app:destination="@id/entranceFragment" />
+        <action
+            android:id="@+id/action_menuFragment2_to_instructionFragment"
+            app:destination="@id/instructionFragment" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
@@ -42,13 +45,9 @@
     </fragment>
     <fragment
         android:id="@+id/entranceFragment"
-        android:name="com.whayway.beerrandom.fragments.EntranceFragment"
+        android:name="com.whayway.beerrandom.scoreboard.ScoreboardFragment"
         android:label="fragment_entrance"
-        tools:layout="@layout/fragment_entrance" >
-        <action
-            android:id="@+id/action_entranceFragment_to_instructionFragment"
-            app:destination="@id/instructionFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_scoreboard" />
     <dialog
         android:id="@+id/myDialog"
         android:name="com.whayway.beerrandom.dialog.MyDialog"

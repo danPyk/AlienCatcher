@@ -1,6 +1,5 @@
 package com.whayway.beerrandom.dialog
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.whayway.beerrandom.data.ScoreBoard
@@ -15,7 +14,7 @@ class MyDialogViewModel(val database: ScoreBoardDao) : ViewModel() {
         // launch a coroutine in the viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
             val newScore = ScoreBoard()
-            newScore.score_board = score
+            newScore.score_points = score
             newScore.score_name = name
 
             insert(newScore)

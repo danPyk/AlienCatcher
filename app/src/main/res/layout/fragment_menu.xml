@@ -19,19 +19,19 @@
             android:layout_marginTop="40dp"
             android:layout_marginBottom="37dp"
             android:text="Start"
-            app:layout_constraintBottom_toTopOf="@+id/btnOptionsMenu"
+            app:layout_constraintBottom_toTopOf="@+id/btnScoreboard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <Button
-            android:id="@+id/btnOptionsMenu"
+            android:id="@+id/btnScoreboard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"
-            android:text="Options"
+            android:text="Scoreboard"
             app:layout_constraintBottom_toTopOf="@+id/btnExit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.42"
@@ -49,7 +49,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnOptionsMenu"
+            app:layout_constraintTop_toBottomOf="@+id/btnScoreboard"
             app:layout_constraintVertical_bias="1.0" />
 
         <ImageView

@@ -23,7 +23,7 @@ class MyDialog: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.custom_popup, container, false)
+        return inflater.inflate(R.layout.fragment_mydialog, container, false)
 
     }
 
@@ -47,10 +47,10 @@ class MyDialog: DialogFragment() {
         view?.findViewById<Button>(R.id.btnFollow)?.setOnClickListener {
             val edit = editText.text.toString()
             if(edit==""){
-                 showPopUp()
-                }else{
-                    //todo maybe add Loading Spinner
-                    //edit
+                showPopUp()
+            }else{
+                //todo maybe add Loading Spinner
+                //edit
 /*            findNavController().navigate (
                 MyDialogDirections.actionMyDialogToResultFragment(
                     args.score
@@ -62,7 +62,7 @@ class MyDialog: DialogFragment() {
 
         }
         view?.findViewById<TextView>(R.id.txtClose)?.setOnClickListener {
-          //  textView.text = dataSource.getTonight().toString()
+            //  textView.text = dataSource.getTonight().toString()
 
 
         }
@@ -82,7 +82,7 @@ class MyDialog: DialogFragment() {
 
         }
     }
-       //hold current score
+    //hold current score
 
 
 

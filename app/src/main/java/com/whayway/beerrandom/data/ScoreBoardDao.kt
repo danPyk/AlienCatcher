@@ -21,6 +21,6 @@ interface ScoreBoardDao {
     @Query("SELECT * FROM  score_board_table  WHERE scoreId =  ")
     fun getTonight(): ScoreBoard*/
     //desc = descending order
-    @Query("SELECT * FROM score_board_table ORDER BY scoreId DESC")
-    fun getAllNights(): LiveData<List<ScoreBoard>>
+    @Query("SELECT * FROM score_board_table ORDER BY score_scoreboard DESC ")
+    fun getAllScores(): List<ScoreBoard>
 }

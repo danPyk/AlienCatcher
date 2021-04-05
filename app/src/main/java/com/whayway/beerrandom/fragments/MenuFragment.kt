@@ -19,14 +19,15 @@ class MenuFragment : Fragment() {
             inflater, R.layout.fragment_menu, container, false)
 
         binding.btnStartGame.setOnClickListener { view : View ->
-            view.findNavController().navigate(MenuFragmentDirections.actionMenuFragment2ToEntranceFragment2())
+            view.findNavController().navigate(R.id.action_menuFragment2_to_instructionFragment)
         }
-/*        binding.btnOptionsMenu.setOnClickListener { view : View ->
-            view.findNavController().navigate(R.id.action_startFragment_to_gameFragment)
+        binding.btnScoreboard.setOnClickListener { view : View ->
+            view.findNavController().navigate(R.id.action_menuFragment2_to_entranceFragment2)
         }
         binding.btnExit.setOnClickListener { view : View ->
-            view.findNavController().navigate(R.id.action_startFragment_to_gameFragment)
-        }*/
+            System.exit(0);
+
+        }
             return binding.root}
 }
 

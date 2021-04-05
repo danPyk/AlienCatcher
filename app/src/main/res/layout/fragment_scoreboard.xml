@@ -2,14 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="scoreboardyViewModel"
+            type="com.whayway.beerrandom.scoreboard.ScoreboardViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.EntranceFragment">
+        tools:context=".scoreboard.ScoreboardFragment">
 
         <!-- TODO: Update blank fragment layout -->
+
 
         <Button
             android:id="@+id/okBtn3"
@@ -22,6 +28,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.884" />
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/score_list"
+
+            android:layout_width="306dp"
+            android:layout_height="382dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/okBtn3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.743" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
