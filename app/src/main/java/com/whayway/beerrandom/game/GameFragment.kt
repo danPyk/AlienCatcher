@@ -41,6 +41,8 @@ class GameFragment  : androidx.fragment.app.Fragment() {
 
         object : CountDownTimer(3000, 1000) {
              override fun onTick(p0: Long) {
+                 //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
+                 //create separate binding for this?
                 btn_ok.visibility = View.INVISIBLE
 
                 timeText.text = "Time: " + (p0 / 1000)

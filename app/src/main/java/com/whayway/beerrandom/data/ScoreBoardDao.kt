@@ -1,15 +1,16 @@
 package com.whayway.beerrandom.data
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 
 @Dao
 interface ScoreBoardDao {
     @Insert
-    fun insert(scoreBoard: ScoreBoard)
+    suspend fun insert(scoreBoard: ScoreBoard)
 
     @Update
-    fun update(scoreBoard: ScoreBoard)
+    suspend fun update(scoreBoard: ScoreBoard)
 
     @Query("SELECT * from score_board_table WHERE scoreId = :key")
     fun get(key: Long): ScoreBoard?
@@ -21,6 +22,10 @@ interface ScoreBoardDao {
     @Query("SELECT * FROM  score_board_table  WHERE scoreId =  ")
     fun getTonight(): ScoreBoard*/
     //desc = descending order
-    @Query("SELECT * FROM score_board_table ORDER BY score_scoreboard DESC ")
-    fun getAllScores(): List<ScoreBoard>
+    @Query("SELECT * FROM score_board_table ")//ORDER BY score_scoreboard DESC
+     fun getAllScores(): LiveData<List<ScoreBoard>>
+
+
+    @Query("SELECT * FROM score_board_table ORDER BY scoreId DESC LIMIT 1")
+    suspend fun getTonight(): ScoreBoard?
 }

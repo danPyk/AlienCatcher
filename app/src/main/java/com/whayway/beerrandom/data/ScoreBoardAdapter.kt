@@ -1,30 +1,38 @@
 package com.whayway.beerrandom.data
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.recyclerview.widget.RecyclerView
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.TextItemViewHolder
-import java.util.Collections.list
+import java.util.ArrayList
 
-class ScoreBoardAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
+class   ScoreBoardAdapter(private val   list: List<ScoreBoard>): RecyclerView.Adapter<TextItemViewHolder>() {
 
-    var data = listOf<ScoreBoard>()
-        // adapter needs to let the RecyclerView know when the data has changed, because the RecyclerView knows nothing about the data.
-        //so we need to update
-        //todo change notifyDataSetChanged(), becouse of hevy load
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+    var data =  listOf<ScoreBoard>()
+        set(value) {
+            Log.i(TAG, "datadata: $data ")
+            field = value
+            notifyDataSetChanged()
+        }
+
+
     //total number of items
-    override fun getItemCount() = data.size
+    override fun getItemCount(): Int {
+        val size = list.size
+        return size
+    }
 
     //called by RecyclerView to display the data for one list item on specific position
     override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
-        val item = data[position]
-        holder.textView.text = item.scoreId.toString()
+       val item = list.get(position)
+        holder.textView.text = item?.scoreId.toString()
     }
 
     //viewType parameter is used when there are multiple views in the same RecyclerView
@@ -39,4 +47,5 @@ class ScoreBoardAdapter: RecyclerView.Adapter<TextItemViewHolder>() {
 
         return TextItemViewHolder(view)
     }
+ 
 }

@@ -22,6 +22,7 @@ class GameViewModel: ViewModel() {
     init{
         hideImages()
         _score.value = 0
+
     }
     fun hideImages() {
         runnable = object: Runnable {

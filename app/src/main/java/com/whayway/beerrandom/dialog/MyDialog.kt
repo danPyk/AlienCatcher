@@ -6,16 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreDatabase
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
-import kotlinx.android.synthetic.main.fragment_result.*
 
 class MyDialog: DialogFragment() {
     override fun onCreateView(
@@ -56,7 +51,8 @@ class MyDialog: DialogFragment() {
                     args.score
                 )
             )*/
-                sleepQualityViewModel.onStartTracking(args.score, edit)
+                sleepQualityViewModel.saveScore(args.score, edit)
+                sleepQualityViewModel.onStop()
 
             }
 
