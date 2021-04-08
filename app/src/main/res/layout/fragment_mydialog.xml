@@ -14,7 +14,7 @@
     android:padding="5dp"
     android:layout_gravity="center">
     <TextView
-        android:id="@+id/txtClose"
+        android:id="@+id/txt_close_view"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:textColor="@color/white"
@@ -35,7 +35,7 @@
             android:layout_marginTop="15dp"/>
 
         <TextView
-            android:id="@+id/scoreView"
+            android:id="@+id/score_view_mydialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your score: "
@@ -57,7 +57,7 @@
             android:layout_width="0dp"
             android:layout_height="100dp">
             <TextView
-                android:id="@+id/nameTextView"
+                android:id="@+id/name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Your name: "
@@ -66,7 +66,7 @@
                 android:layout_marginTop="5dp"/>
 
             <EditText
-                android:id="@+id/editTextView"
+                android:id="@+id/edit_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
@@ -77,7 +77,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnFollow"
+        android:id="@+id/btn_follow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Follow Me"

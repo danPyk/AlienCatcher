@@ -7,20 +7,32 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreDatabase
+import com.whayway.beerrandom.databinding.FragmentMydialogBinding
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
 
 class MyDialog: DialogFragment() {
+    //todo change usage of binding like here
+    private var _binding: FragmentMydialogBinding? = null
+
+    // This property is only valid between onCreateView and
+// onDestroyView.
+    private val binding get() = _binding!!
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_mydialog, container, false)
-
+        _binding = FragmentMydialogBinding.inflate(inflater, container, false)
+        return binding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,29 +49,27 @@ class MyDialog: DialogFragment() {
         //sleepQualityViewModel = sleepQualityViewModel
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
-        val editText = requireView().findViewById<EditText>(R.id.editTextView)
+        val editText = requireView().findViewById<EditText>(R.id.edit_text)
 
-        view?.findViewById<Button>(R.id.btnFollow)?.setOnClickListener {
+        view?.findViewById<Button>(R.id.btn_follow)?.setOnClickListener {
             val edit = editText.text.toString()
             if(edit==""){
                 showPopUp()
             }else{
                 //todo maybe add Loading Spinner
-                //edit
-/*            findNavController().navigate (
-                MyDialogDirections.actionMyDialogToResultFragment(
-                    args.score
-                )
-            )*/
                 sleepQualityViewModel.saveScore(args.score, edit)
                 sleepQualityViewModel.onStop()
+                findNavController().navigate (
+                    MyDialogDirections.actionMyDialogToResultFragment(
+                        args.score
+                    )
+                )
 
             }
 
         }
-        view?.findViewById<TextView>(R.id.txtClose)?.setOnClickListener {
+        view?.findViewById<TextView>(R.id.txt_close_view)?.setOnClickListener {
             //  textView.text = dataSource.getTonight().toString()
-
 
         }
 
@@ -78,7 +88,10 @@ class MyDialog: DialogFragment() {
 
         }
     }
-    //hold current score
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 
 

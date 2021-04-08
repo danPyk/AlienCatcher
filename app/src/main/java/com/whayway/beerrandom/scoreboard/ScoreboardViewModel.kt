@@ -16,7 +16,7 @@ class ScoreboardViewModel(dataSource: ScoreBoardDao, application: Application) :
 
      val database = dataSource
 
-    // val nights = database.getAllScores()
+    val allResults = database.getAllScores()
 
     init{
 
