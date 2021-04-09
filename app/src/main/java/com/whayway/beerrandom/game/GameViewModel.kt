@@ -11,7 +11,7 @@ import java.util.*
 
 class GameViewModel: ViewModel() {
     //list with images
-    lateinit var imageArray:  ArrayList<ImageView>
+    lateinit var viewList:  ArrayList<ImageView>
 
     var _score = MutableLiveData<Int>()
     val score: LiveData<Int>
@@ -28,40 +28,42 @@ class GameViewModel: ViewModel() {
     fun hideImages() {
         runnable = object: Runnable {
             override fun run() {
-                for (image in imageArray) {
+                for (image in viewList) {
                     image.visibility = View.INVISIBLE
                 }
                 val random = Random()
                 val index = random.nextInt(8 - 1)
-                imageArray[index].visibility = View.VISIBLE
-                handler.postDelayed(runnable, 500)
+                viewList[index].visibility = View.VISIBLE
+                handler.postDelayed(runnable, 450)
             }
         }
         handler.post(runnable)
     }
     //random image bind to view
-    fun setImage(){
-        var drawableArray = arrayListOf(
+    fun setImage(view: ImageView){
+        var drawableList = arrayListOf(
             R.drawable.shipbeige_manned,
             R.drawable.shipblue_manned,
             R.drawable.shipgreen_manned,
             R.drawable.shippink_manned,
             R.drawable.shipyellow_manned,
+            R.drawable.shipblue_cowed,
+            R.drawable.shipblue_cowed
+
         )
         val random = Random()
-        val index = random.nextInt(5 - 1)
-        val index2 = random.nextInt(8 - 1)
-        imageArray[index2].setImageResource(drawableArray[index])
+        val indexDrawables = random.nextInt(7 - 1)
+       view.setImageResource(drawableList[indexDrawables])
 
     }
      fun increaseScore() {
          _score.value = (_score.value)?.plus(1)
     }
      fun increaseScoreBoss() {
-         _score.value = (_score.value)?.plus(5)
+         _score.value = (_score.value)?.plus(2)
     }
      fun decreaseScore() {
-         _score.value = (_score.value)?.minus(10)
+         _score.value = (_score.value)?.minus(3)
     }
     override fun onCleared() {
         super.onCleared()
