@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bluelight">
+    android:background="@color/primary_light">
 
     <!--    <ImageView
         android:id="@+id/quality_image"
@@ -52,6 +52,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#FFFFFF"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

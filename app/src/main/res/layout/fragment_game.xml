@@ -5,18 +5,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
-        android:background="#FFF"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#FFF"
         tools:context="com.whayway.beerrandom">
 
         <ImageView
-            android:id="@+id/imageViewPawel"
+            android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="88dp"
 
-            android:background="@drawable/lech_puszka"
+            android:background="@drawable/shipbeige_manned"
             android:clickable="true"
             android:onClick="increaseScore"
             android:text="btn2"
@@ -28,11 +28,11 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
-            android:id="@+id/imageViewLechFree"
+            android:id="@+id/imageViewCow"
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/lech_free"
+            android:background="@drawable/shipblue_cowed"
 
 
             android:clickable="true"
@@ -40,16 +40,16 @@
             android:text="btn3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView5"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.868" />
+            app:layout_constraintVertical_bias="1.0" />
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/leszek"
+            android:background="@drawable/shipblue_manned"
 
 
             android:text="btn5"
@@ -62,12 +62,12 @@
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/leszek"
+            android:background="@drawable/shipgreen_manned"
 
 
             android:text="btn6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.216"
+            app:layout_constraintHorizontal_bias="0.666"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -76,10 +76,10 @@
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
-            android:background="@drawable/leszek"
+            android:background="@drawable/shipgreen_manned"
 
             android:text="btn7"
-            app:layout_constraintBottom_toTopOf="@+id/imageViewPawel"
+            app:layout_constraintBottom_toTopOf="@+id/imageView1"
             app:layout_constraintEnd_toStartOf="@+id/imageView7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/scoreText" />
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="172dp"
-            android:background="@drawable/leszek"
+            android:background="@drawable/shippink_manned"
 
             android:text="Button"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,9 +104,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
 
-            android:background="@drawable/leszek"
+            android:background="@drawable/shipyellow_manned"
             android:text="Button"
-            app:layout_constraintBottom_toTopOf="@+id/imageViewPawel"
+            app:layout_constraintBottom_toTopOf="@+id/imageView1"
             app:layout_constraintStart_toStartOf="@+id/timeText"
             app:layout_constraintTop_toTopOf="@+id/imageView7"
             app:layout_constraintVertical_bias="0.0" />
@@ -116,9 +116,9 @@
             android:layout_width="wrap_content"
 
             android:layout_height="wrap_content"
-            android:background="@drawable/leszek"
+            android:background="@drawable/shipbeige_manned"
 
-            app:layout_constraintBottom_toTopOf="@+id/imageViewPawel"
+            app:layout_constraintBottom_toTopOf="@+id/imageView1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.433"
             app:layout_constraintStart_toEndOf="@+id/imageView8"
@@ -129,37 +129,36 @@
             android:id="@+id/timeText"
             android:layout_width="103dp"
             android:layout_height="42dp"
-            android:layout_marginBottom="64dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/scoreText"
+            app:layout_constraintEnd_toEndOf="@+id/btn_ok"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/scoreText" />
+            app:layout_constraintStart_toStartOf="@+id/btn_ok"
+            app:layout_constraintTop_toBottomOf="@+id/btn_ok"
+            app:layout_constraintVertical_bias="0.453" />
 
         <TextView
             android:id="@+id/scoreText"
             android:layout_width="117dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="16dp"
             android:text="Score: "
-            app:layout_constraintBottom_toTopOf="@+id/imageViewPawel"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView7"
-            app:layout_constraintVertical_bias="0.295" />
+            app:layout_constraintBottom_toTopOf="@+id/btn_ok"
+            app:layout_constraintEnd_toEndOf="@+id/btn_ok"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="@+id/btn_ok"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.755" />
 
         <Button
             android:id="@+id/btn_ok"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="492dp"
+            android:layout_marginTop="500dp"
             android:text="ok"
-            app:layout_constraintBottom_toTopOf="@+id/scoreText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.408"
+            app:layout_constraintHorizontal_bias="0.486"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.312" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

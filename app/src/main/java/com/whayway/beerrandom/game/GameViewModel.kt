@@ -10,8 +10,9 @@ import com.whayway.beerrandom.R
 import java.util.*
 
 class GameViewModel: ViewModel() {
+    //list with images
     lateinit var imageArray:  ArrayList<ImageView>
-    //score in ensapsuleted
+
     var _score = MutableLiveData<Int>()
     val score: LiveData<Int>
          get() = _score
@@ -38,15 +39,17 @@ class GameViewModel: ViewModel() {
         }
         handler.post(runnable)
     }
+    //random image bind to view
     fun setImage(){
-        var drawableArray  = ArrayList<Int>()
-        drawableArray = arrayListOf(
-            R.drawable.lech_puszka,
-            R.drawable.leszek,
-            R.drawable.lech_free
+        var drawableArray = arrayListOf(
+            R.drawable.shipbeige_manned,
+            R.drawable.shipblue_manned,
+            R.drawable.shipgreen_manned,
+            R.drawable.shippink_manned,
+            R.drawable.shipyellow_manned,
         )
         val random = Random()
-        val index = random.nextInt(3 - 1)
+        val index = random.nextInt(5 - 1)
         val index2 = random.nextInt(8 - 1)
         imageArray[index2].setImageResource(drawableArray[index])
 
@@ -54,7 +57,7 @@ class GameViewModel: ViewModel() {
      fun increaseScore() {
          _score.value = (_score.value)?.plus(1)
     }
-     fun increaseScorePawel() {
+     fun increaseScoreBoss() {
          _score.value = (_score.value)?.plus(5)
     }
      fun decreaseScore() {

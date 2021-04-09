@@ -4,7 +4,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/menuFragment2">
+    app:startDestination="@id/menuFragment">
     <fragment
         android:id="@+id/gameFragment"
         android:name="com.whayway.beerrandom.game.GameFragment"
@@ -14,12 +14,12 @@
             app:destination="@id/myDialog" />
     </fragment>
     <fragment
-        android:id="@+id/menuFragment2"
+        android:id="@+id/menuFragment"
         android:name="com.whayway.beerrandom.fragments.MenuFragment"
         android:label="MenuFragment" >
         <action
             android:id="@+id/action_menuFragment2_to_entranceFragment2"
-            app:destination="@id/entranceFragment" />
+            app:destination="@id/scoreboardFragment" />
         <action
             android:id="@+id/action_menuFragment2_to_instructionFragment"
             app:destination="@id/instructionFragment" />
@@ -34,6 +34,9 @@
         <action
             android:id="@+id/action_resultFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
@@ -44,10 +47,14 @@
             app:destination="@id/gameFragment" />
     </fragment>
     <fragment
-        android:id="@+id/entranceFragment"
+        android:id="@+id/scoreboardFragment"
         android:name="com.whayway.beerrandom.scoreboard.ScoreboardFragment"
         android:label="fragment_entrance"
-        tools:layout="@layout/fragment_scoreboard" />
+        tools:layout="@layout/fragment_scoreboard" >
+        <action
+            android:id="@+id/action_scoreboardFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
     <dialog
         android:id="@+id/myDialog"
         android:name="com.whayway.beerrandom.dialog.MyDialog"

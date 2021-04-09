@@ -1,4 +1,4 @@
-package com.whayway.beerrandom.data
+package com.whayway.beerrandom.scoreboard
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.whayway.beerrandom.R
+import com.whayway.beerrandom.data.ScoreBoard
 
 class   ScoreBoardAdapter(): RecyclerView.Adapter<ScoreBoardAdapter.ViewHolder>() {
 

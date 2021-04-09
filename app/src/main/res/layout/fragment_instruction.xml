@@ -32,7 +32,9 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/beer_ranking"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            style="@style/Widget.AppCompat.Button.Colored"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

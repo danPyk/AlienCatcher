@@ -49,14 +49,16 @@ class MyDialog: DialogFragment() {
         //sleepQualityViewModel = sleepQualityViewModel
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
-        val editText = requireView().findViewById<EditText>(R.id.edit_text)
+
+        binding.scoreViewMydialog.text = "Score " +args.score.toString()
+
 
         view?.findViewById<Button>(R.id.btn_follow)?.setOnClickListener {
-            val edit = editText.text.toString()
+            val edit = binding.editText.text.toString()
             if(edit==""){
                 showPopUp()
             }else{
-                //todo maybe add Loading Spinner
+                //todo maybe add Loading Spinner?
                 sleepQualityViewModel.saveScore(args.score, edit)
                 sleepQualityViewModel.onStop()
                 findNavController().navigate (
@@ -64,14 +66,12 @@ class MyDialog: DialogFragment() {
                         args.score
                     )
                 )
-
             }
 
         }
-        view?.findViewById<TextView>(R.id.txt_close_view)?.setOnClickListener {
-            //  textView.text = dataSource.getTonight().toString()
+      /*  view?.findViewById<TextView>(R.id.txt_close_view)?.setOnClickListener {
 
-        }
+        }*/
 
     }
 

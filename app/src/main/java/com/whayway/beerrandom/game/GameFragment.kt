@@ -1,14 +1,14 @@
 package com.whayway.beerrandom.game
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.content.Context
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -39,7 +39,7 @@ class GameFragment  : androidx.fragment.app.Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
 
-        object : CountDownTimer(3000, 1000) {
+        object : CountDownTimer(15000, 1000) {
              override fun onTick(p0: Long) {
                  //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
                  //create separate binding for this?
@@ -70,8 +70,8 @@ class GameFragment  : androidx.fragment.app.Fragment() {
             imageView6,
             imageView5,
             imageView4,
-            imageViewLechFree,
-            imageViewPawel,
+            imageViewCow,
+            imageView1,
             imageView3
         )
         scoreText.setOnClickListener {}
@@ -84,9 +84,9 @@ class GameFragment  : androidx.fragment.app.Fragment() {
             viewModel.setImage() }
         imageView3.setOnClickListener {updateScore()
             viewModel.setImage()}
-        imageViewLechFree.setOnClickListener {updateScoreFree()
+        imageViewCow.setOnClickListener {updateScoreCow()
             viewModel.setImage() }
-        imageViewPawel.setOnClickListener {updateScorePawel()
+        imageView1.setOnClickListener {updateScoreBoss()
             viewModel.setImage()}
         //why after adding binding here i have unresolv ref?
         btn_ok.setOnClickListener { view: View ->
@@ -107,18 +107,27 @@ class GameFragment  : androidx.fragment.app.Fragment() {
             //I can get rig of that, becouse LIveData ovserves and updates score
        // binding.scoreText.text = viewModel.score.value.toString()
     }
-    private fun updateScorePawel() {
-        viewModel.increaseScorePawel()
+    private fun updateScoreBoss() {
+        viewModel.increaseScoreBoss()
     }
-    private fun updateScoreFree() {
+    private fun updateScoreCow() {
         viewModel.decreaseScore()
     }
- /*   private fun gameFinished() {
-        //Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
-        val action = GameFragmentDirections.actionGameFragmentToResultFragment()
-        action.score = viewModel.score.value?:0
-        NavHostFragment.findNavController(this).navigate(action)
-        viewModel.()
-    }*/
+
+ //block back btn whila game
+ override fun onAttach(context: Context) {
+     super.onAttach(context)
+     object : OnBackPressedCallback(
+         true // default to enabled
+     ) {
+         override fun handleOnBackPressed() {
+             Toast.makeText(context, "handleOnBackPressed", Toast.LENGTH_SHORT).show()
+         }
+     }
+     requireActivity().onBackPressedDispatcher.addCallback(this, true) {
+
+     }
+ }
+
 
 }

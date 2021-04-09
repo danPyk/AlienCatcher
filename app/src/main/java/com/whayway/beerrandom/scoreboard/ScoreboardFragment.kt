@@ -8,8 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.whayway.beerrandom.R
-import com.whayway.beerrandom.data.ScoreBoardAdapter
 import com.whayway.beerrandom.data.ScoreDatabase
 
 // TODO: Rename parameter arguments, choose names that match
@@ -56,6 +56,10 @@ class ScoreboardFragment : Fragment() {
          binding.scoreList.adapter = adapter
 
         binding.setLifecycleOwner(this)
+
+        binding.backBtn.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_scoreboardFragment_to_menuFragment)
+        }
 
         return binding.root
     }

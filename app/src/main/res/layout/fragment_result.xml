@@ -5,44 +5,84 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout2"
-        android:background="#FFF"
-
         android:layout_width="match_parent"
+
         android:layout_height="match_parent"
+        android:background="#FFF"
         tools:context=".fragments.ResultFragment">
 
         <!-- TODO: Update blank fragment layout -->
 
-        <ImageView
-            android:id="@+id/imageView"
+        <Button
+            android:id="@+id/menu_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/lech_puszka"
+            android:layout_marginBottom="40dp"
+            android:text="Menu"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/playAgainButton"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/star_view"
+            android:layout_width="78dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginBottom="300dp"
+            app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/star_view2"
+            android:layout_width="78dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
+            app:layout_constraintStart_toEndOf="@+id/star_view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.375" />
+
+        <ImageView
+            android:id="@+id/star_view3"
+            android:layout_width="78dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="180dp"
             app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintHorizontal_bias="0.164"
+            app:layout_constraintStart_toEndOf="@+id/star_view2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/playAgainButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="164dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="88dp"
+            android:layout_height="59dp"
+            android:layout_marginBottom="116dp"
             android:text="Play again"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.526"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/playAgainButton" />
+            app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
+            app:layout_constraintEnd_toEndOf="@+id/playAgainButton"
+            app:layout_constraintStart_toStartOf="@+id/playAgainButton"
+            app:layout_constraintTop_toBottomOf="@+id/star_view"
+            app:layout_constraintVertical_bias="0.509" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

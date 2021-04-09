@@ -23,7 +23,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            style="@style/Widget.AppCompat.Button.Colored"
+            />
 
         <Button
             android:id="@+id/btnScoreboard"
@@ -36,7 +38,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.42"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnStartGame" />
+            app:layout_constraintTop_toBottomOf="@+id/btnStartGame"
+            style="@style/Widget.AppCompat.Button.Colored"
+            />
 
         <Button
             android:id="@+id/btnExit"
@@ -50,7 +54,9 @@
             app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnScoreboard"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintVertical_bias="1.0"
+            style="@style/Widget.AppCompat.Button.Colored"
+            />
 
         <ImageView
             android:id="@+id/imageView2"

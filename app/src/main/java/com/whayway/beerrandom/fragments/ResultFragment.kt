@@ -1,22 +1,23 @@
-package com.whayway.beerrandom.result
+package com.whayway.beerrandom.fragments
 
+import android.app.Fragment
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.beta.kanyenotifications.ui.home.ResultViewModelFactory
 import com.whayway.beerrandom.R
 
 import com.whayway.beerrandom.databinding.FragmentResultBinding
-import com.whayway.beerrandom.fragments.ResultFragmentArgs
-import com.whayway.beerrandom.fragments.ResultFragmentDirections
+
 //todo correct back navigation
-class ResultFragment  : Fragment() {
-    // private lateinit var viewModel: ResultViewModel
-    // private lateinit var binding: FragmentGameBinding
+class ResultFragment  : androidx.fragment.app.Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -26,36 +27,38 @@ class ResultFragment  : Fragment() {
             inflater, R.layout.fragment_result, container, false
         )
 
-        val application = requireNotNull(this.activity).application
-
-       // val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
-
-        val viewModelFactory = ResultViewModelFactory( application)
-
-        val resultViewModel =
-            ViewModelProvider(
-                this, viewModelFactory
-            ).get(ResultViewModel::class.java)
-
         binding.playAgainButton.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(ResultFragmentDirections.actionResultFragmentToGameFragment())
         }
         val args = ResultFragmentArgs.fromBundle(requireArguments())
-/*       Toast.makeText(context, "NumCorrect: ${args.score}", Toast.LENGTH_LONG).show()*/
-        if (args.score < 15) {
-            binding.imageView.setImageResource(R.drawable.lech_free)
-        } else if ((args.score > 15) || (args.score < 30)) {
-            binding.imageView.setImageResource(R.drawable.lech_free)
+        if (args.score > 30) {
+            binding.starView.setImageResource(R.drawable.color_star_6)
+            binding.starView2.setImageResource(R.drawable.color_star_6)
+            binding.starView3.setImageResource(R.drawable.color_star_6)
+            binding.textView.text = "Well done!"
+        } else if ((args.score > 15) && (args.score < 30)) {
+            binding.starView.setImageResource(R.drawable.color_star_6)
+            binding.starView2.setImageResource(R.drawable.color_star_6)
+            binding.starView3.setImageResource(R.drawable.white_board)
+            binding.textView.text = "Quite good."
+
         } else {
-            binding.imageView.setImageResource(R.drawable.lech_free)
+            binding.starView.setImageResource(R.drawable.color_star_6)
+            binding.starView2.setImageResource(R.drawable.white_board)
+            binding.starView3.setImageResource(R.drawable.white_board)
+            binding.textView.text = "You should practice more"
+
         }
-        binding.setLifecycleOwner(this)
+
+        binding.menuBtn.setOnClickListener { view: View ->
+            view.findNavController().navigate(R.id.action_resultFragment_to_menuFragment)
+        }
         //binding.resultViewModel = resultViewModel
         return binding.root
     }
 
-    // Creating our Share Intent
+/*    // Creating our Share Intent
     private fun getShareIntent(): Intent {
         //retriving data, like for toas massage
         val args = ResultFragmentArgs.fromBundle(requireArguments())
@@ -87,6 +90,22 @@ class ResultFragment  : Fragment() {
             R.id.share -> shareSuccess()
         }
         return super.onOptionsItemSelected(item)
+    }*/
+
+    //block back btn whila game
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        object : OnBackPressedCallback(
+            true // default to enabled
+        ) {
+            override fun handleOnBackPressed() {
+                Toast.makeText(context, "handleOnBackPressed", Toast.LENGTH_SHORT).show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, true) {
+
+        }
     }
+
 
 }
