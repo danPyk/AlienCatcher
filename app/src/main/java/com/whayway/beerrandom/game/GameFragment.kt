@@ -1,5 +1,6 @@
 package com.whayway.beerrandom.game
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -15,26 +16,27 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentGameBinding
+import com.whayway.beerrandom.dialog.MyDialogFragmentDirections
 import kotlinx.android.synthetic.main.fragment_game.*
-import java.util.*
+import kotlinx.android.synthetic.main.fragment_result.*
 
 
-const val KEY_SCORE = "score_key"
-
-class GameFragment  : androidx.fragment.app.Fragment() {
+class GameFragment : androidx.fragment.app.Fragment() {
     private lateinit var binding: FragmentGameBinding
     private lateinit var viewModel: GameViewModel
 
+    @SuppressLint("StringFormatMatches")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
@@ -47,27 +49,41 @@ class GameFragment  : androidx.fragment.app.Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
 
-        object : CountDownTimer(30000, 1000) {
+        object : CountDownTimer(viewModel.gameTime.value!!, 1000) {
              override fun onTick(p0: Long) {
                  //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
                  //create separate binding for this?
                 btn_ok.visibility = View.INVISIBLE
-
-                timeText.text = "Time: " + (p0 / 1000)
+                 val timeDivided = p0/1000
+                 timeText.text = getString(R.string.time, "$timeDivided")
             }
             override fun onFinish() {
-                timeText.text = "Time out"
+
+                timeText.text = getString(R.string.time_out)
                 viewModel.handler.removeCallbacks(viewModel.runnable)
                 for (image in viewModel.viewList) {
                     image.visibility = View.INVISIBLE
                     btn_ok.visibility = View.VISIBLE
                 }
+                viewModel._gameTime.value = 0L
+
             }
         }.start()
 
-        viewModel.score.observe(viewLifecycleOwner, androidx.lifecycle.Observer { newScore ->
-            binding.scoreText.text = "Score: "+newScore.toString()
-        })
+        viewModel.score.observe(viewLifecycleOwner,  { newScore ->
+            binding.scoreText.text = getString(R.string.score_msg, "$newScore")
+            }
+      )
+        viewModel.gameTime.observe(viewLifecycleOwner, Observer   { newScore ->
+            if(newScore == 0L){
+                findNavController().navigate (
+                    GameFragmentDirections.actionGameFragmentToMyDialog(
+                       viewModel.score.value!!
+                    )
+                )
+            }
+        }
+        )
 
         return binding.root
     }
@@ -81,55 +97,43 @@ class GameFragment  : androidx.fragment.app.Fragment() {
             imageViewCow,
             imageView1,
             imageView3
-        )
-        imageView8.setOnClickListener { isThisCow(imageView8)
+        )            //todo: add boss
+
+        imageView8.setOnClickListener { imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmatp)
            }
-        imageView7.setOnClickListener { isThisCow(imageView7)
+        imageView7.setOnClickListener { imageViewSrc(imageView7, viewModel.bossBitMap, viewModel.cowBitmatp)
           }
-        imageView8.setOnClickListener{  isThisCow(imageView8)
+        imageView8.setOnClickListener{  imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmatp)
           }
-        imageView6.setOnClickListener {  isThisCow(imageView6)
+        imageView6.setOnClickListener {  imageViewSrc(imageView6, viewModel.bossBitMap, viewModel.cowBitmatp)
            }
-        imageView5.setOnClickListener {  isThisCow(imageView5)
+        imageView5.setOnClickListener {  imageViewSrc(imageView5, viewModel.bossBitMap, viewModel.cowBitmatp)
             }
-        imageView4.setOnClickListener { isThisCow(imageView4)
+        imageView4.setOnClickListener { imageViewSrc(imageView4, viewModel.bossBitMap, viewModel.cowBitmatp)
             }
-        imageView3.setOnClickListener { isThisCow(imageView3)
+        imageView3.setOnClickListener { imageViewSrc(imageView3, viewModel.bossBitMap, viewModel.cowBitmatp)
          }
-            //todo: do not bind view with res, check in every view if this is cow
         imageViewCow.setOnClickListener {
-            isThisCow(imageViewCow)
+            imageViewSrc(imageViewCow, viewModel.bossBitMap, viewModel.cowBitmatp)
         }
 
-        imageView1.setOnClickListener {isThisCow(imageView1)}
-
-        //why after adding binding here i have unresolv ref?
-        btn_ok.setOnClickListener { view: View ->
-            view.findNavController().navigate(
-                GameFragmentDirections.actionGameFragmentToMyDialog(
-                    viewModel.score.value!!
-                )
-            )
-        }
+        imageView1.setOnClickListener {imageViewSrc(imageView1, viewModel.bossBitMap, viewModel.cowBitmatp)}
 
         super.onViewCreated(view, savedInstanceState)
         //separate views frome data?
         setHasOptionsMenu(true)
     }
-    private fun isThisCow(imageView: ImageView){
-        //todo change to lateinit
-        val marker = ResourcesCompat.getDrawable(resources, R.drawable.shipblue_cowed, null)
-        var markerBitmam = marker?.toBitmap()
+    private fun imageViewSrc(imageView: ImageView, boss: Bitmap?, cow: Bitmap?){
+        val drawable = viewModel.toBitmap(imageView.drawable)
 
-
-        val drawable = imageView.drawable.toBitmap()
-
-        if (drawable.pixelsEqualTo(markerBitmam)){
+        if (drawable.pixelsEqualTo(cow)){
             updateScoreCow()
+            viewModel.setImage(imageView)
+        }else if (drawable.pixelsEqualTo(boss)){
+            updateScoreBoss()
             viewModel.setImage(imageView)
         }else{
             updateScore()
-            viewModel.setImage(imageView)
         }
     }
 
@@ -159,21 +163,11 @@ class GameFragment  : androidx.fragment.app.Fragment() {
 
      }
  }
-    //convert drawable to bitmap
-    fun <T : Drawable> T.toBitmap(): Bitmap {
-        if (this is BitmapDrawable) return bitmap
 
-        val drawable: Drawable = this
-        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.width, canvas.height)
-        drawable.draw(canvas)
-        return bitmap
-    }
     //compare pixels of bitmaps
     fun Bitmap.pixelsEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) = otherBitmap?.let { other ->
         if (width == other.width && height == other.height) {
-            val res = Arrays.equals(toPixels(), other.toPixels())
+            val res = toPixels().contentEquals(other.toPixels())
             if (shouldRecycle) {
                 doRecycle().also { otherBitmap.doRecycle() }
             }
@@ -185,7 +179,6 @@ class GameFragment  : androidx.fragment.app.Fragment() {
         if (!isRecycled) recycle()
     }
     fun Bitmap.toPixels() = IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }
-
 
 
 }

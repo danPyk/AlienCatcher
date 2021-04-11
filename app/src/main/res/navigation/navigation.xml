@@ -57,7 +57,7 @@
     </fragment>
     <dialog
         android:id="@+id/myDialog"
-        android:name="com.whayway.beerrandom.dialog.MyDialog"
+        android:name="com.whayway.beerrandom.dialog.MyDialogFragment"
         android:label="MyDialog" >
         <action
             android:id="@+id/action_myDialog_to_resultFragment"

@@ -12,43 +12,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
-class ScoreboardViewModel(dataSource: ScoreBoardDao, application: Application) : ViewModel() {
+class ScoreboardViewModel(dataSource: ScoreBoardDao) : ViewModel() {
 
-     val database = dataSource
+     private val database = dataSource
 
     val allResults = database.getAllScores()
-
-    init{
-
-    }
-
-    val xd: Int
-        get() {
-            TODO()
-        }
-
-/*
-    private fun getScore(db: ScoreBoardDao){
-        viewModelScope.launch(Dispatchers.IO){
-            getScoreFromDB(db)
-
-        }
-    }
-     suspend fun getScoreFromDB(dataBase: ScoreBoardDao): LiveData<List<ScoreBoard>> {
-
-        var list = dataBase?.getAllScores()
-        var myDataLists: List<ScoreBoard>
-
-        var dupa: String
-        return list
-    }*/
-     fun generateList(): LiveData<List<ScoreBoard>>{
-        val list = database.getAllScores()
-
-        return list
-
-    }
-
 
 
 }

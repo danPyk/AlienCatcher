@@ -1,18 +1,16 @@
 package com.whayway.beerrandom.fragments
 
-import android.app.Fragment
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.whayway.beerrandom.R
-
 import com.whayway.beerrandom.databinding.FragmentResultBinding
 
 //todo correct back navigation
@@ -22,7 +20,7 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentResultBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_result, container, false
         )
@@ -36,18 +34,18 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
             binding.starView.setImageResource(R.drawable.color_star_6)
             binding.starView2.setImageResource(R.drawable.color_star_6)
             binding.starView3.setImageResource(R.drawable.color_star_6)
-            binding.textView.text = "Well done!"
+            binding.textView.text = getString(R.string.great_result)
         } else if ((args.score > 15) && (args.score < 30)) {
             binding.starView.setImageResource(R.drawable.color_star_6)
             binding.starView2.setImageResource(R.drawable.color_star_6)
             binding.starView3.setImageResource(R.drawable.white_board)
-            binding.textView.text = "Quite good."
+            binding.textView.text = getString(R.string.good_result)
 
         } else {
             binding.starView.setImageResource(R.drawable.color_star_6)
             binding.starView2.setImageResource(R.drawable.white_board)
             binding.starView3.setImageResource(R.drawable.white_board)
-            binding.textView.text = "You should practice more"
+            binding.textView.text = getString(R.string.bad_result)
 
         }
 

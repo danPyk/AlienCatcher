@@ -1,6 +1,5 @@
 package com.whayway.beerrandom.dialog
 
-import android.provider.SyncStateContract.Helpers.update
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,12 +8,13 @@ import com.whayway.beerrandom.data.ScoreBoardDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MyDialogViewModel(val database: ScoreBoardDao) : ViewModel() {
+class MyDialogViewModel(private val database: ScoreBoardDao) : ViewModel() {
 
-     var  timeSpend = MutableLiveData<ScoreBoard>()
+     private var  timeSpend = MutableLiveData<ScoreBoard>()
 
     init {
         initializeTonight()
+
     }
 
     fun saveScore(score: Int, name: String) {

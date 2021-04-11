@@ -1,31 +1,51 @@
 package com.whayway.beerrandom.game
 
+import android.app.Application
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
+import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.whayway.beerrandom.R
 import java.util.*
 
-class GameViewModel: ViewModel() {
+class GameViewModel(application: Application): AndroidViewModel(application) {
     //list with images
     lateinit var viewList:  ArrayList<ImageView>
 
-    var _score = MutableLiveData<Int>()
+    private var _score = MutableLiveData<Int>()
     val score: LiveData<Int>
          get() = _score
+
+     var  _gameTime =  MutableLiveData<Long>()
+    val gameTime: LiveData<Long>
+        get() = _gameTime
+
 
     var runnable: Runnable = Runnable { }
     var handler: Handler = Handler()
 
+    var cowMarker = ResourcesCompat.getDrawable(getApplication<Application>().resources, R.drawable.shipblue_cowed, null)
+    var bossMarker = ResourcesCompat.getDrawable( getApplication<Application>().resources, R.drawable.shippink_manned, null)
+
+    val bossBitMap =  toBitmap(bossMarker!!)
+    val cowBitmatp =  toBitmap(cowMarker!!)
+
     init{
         hideImages()
         _score.value = 0
+        _gameTime.value = 2000
+
 
     }
-    fun hideImages() {
+    private fun hideImages() {
         runnable = object: Runnable {
             override fun run() {
                 for (image in viewList) {
@@ -41,7 +61,7 @@ class GameViewModel: ViewModel() {
     }
     //random image bind to view
     fun setImage(view: ImageView){
-        var drawableList = arrayListOf(
+        val drawableList = arrayListOf(
             R.drawable.shipbeige_manned,
             R.drawable.shipblue_manned,
             R.drawable.shipgreen_manned,
@@ -65,7 +85,19 @@ class GameViewModel: ViewModel() {
      fun decreaseScore() {
          _score.value = (_score.value)?.minus(3)
     }
+    //todo update viewmodel
     override fun onCleared() {
         super.onCleared()
     }
+    //convert drawable to bitmap
+    fun toBitmap(drawable: Drawable): Bitmap {
+
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
+    }
+
+
 }

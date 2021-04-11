@@ -8,22 +8,31 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreBoard
+/*//takes an old list and a new list and figures out what's different.
+class SleepNightDiffCallback : DiffUtil.ItemCallback<ScoreBoard>() {
+    override fun areItemsTheSame(oldItem: ScoreBoard, newItem: ScoreBoard): Boolean {
+        return oldItem.scoreId == newItem.scoreId
+    }
 
+    override fun areContentsTheSame(oldItem: ScoreBoard, newItem: ScoreBoard): Boolean {
+        return oldItem == newItem
+    }
+}*/
 class   ScoreBoardAdapter(): RecyclerView.Adapter<ScoreBoardAdapter.ViewHolder>() {
-
 
 
     var data =  listOf<ScoreBoard>()
         set(value) {
             field = value
+            //todo exted ListAdapter
+            //not the best way to update data
             notifyDataSetChanged()
         }
 
 
     //total number of items
     override fun getItemCount(): Int {
-        val size = data.size
-        return size
+        return data.size
     }
 
 
@@ -43,9 +52,10 @@ class   ScoreBoardAdapter(): RecyclerView.Adapter<ScoreBoardAdapter.ViewHolder>(
     }
 
     class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val scoreNameTextView: TextView = itemView.findViewById(R.id.name_view)
-        val scoreResultTextView: TextView = itemView.findViewById(R.id.score_view)
-        val scoreIdTextView: TextView = itemView.findViewById(R.id.id_view)
+        //todo change to databinding
+        private val scoreNameTextView: TextView = itemView.findViewById(R.id.name_view)
+        private val scoreResultTextView: TextView = itemView.findViewById(R.id.score_view)
+        private val scoreIdTextView: TextView = itemView.findViewById(R.id.id_view)
         //fun extracted from onBindVIewHolder to separate logic
 
         fun bind(
@@ -76,6 +86,7 @@ class   ScoreBoardAdapter(): RecyclerView.Adapter<ScoreBoardAdapter.ViewHolder>(
             }
         }
     }
+
 
 
 }

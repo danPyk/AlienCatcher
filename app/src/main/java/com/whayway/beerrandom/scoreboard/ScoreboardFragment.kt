@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.whayway.beerrandom.R
@@ -23,7 +22,7 @@ class ScoreboardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: com.whayway.beerrandom.databinding.FragmentScoreboardBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_scoreboard, container, false
         )
@@ -31,7 +30,7 @@ class ScoreboardFragment : Fragment() {
         val application = requireNotNull(this.activity).application
 
         val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
-        val viewModelFactory = ScoreboardViewModelFactory(dataSource!!, application)
+        val viewModelFactory = ScoreboardViewModelFactory(dataSource!!)
 
         val scoreboardyViewModel =
             ViewModelProvider(
@@ -46,7 +45,7 @@ class ScoreboardFragment : Fragment() {
         val adapter = ScoreBoardAdapter()
         //By supplying the fragment's viewLifecycleOwner as the lifecycle owner, you can make sure this observer is only active when the RecyclerView is on the screen.
 
-        scoreboardyViewModel.allResults.observe(viewLifecycleOwner, Observer {
+        scoreboardyViewModel.allResults.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.data = it
             }
@@ -55,7 +54,7 @@ class ScoreboardFragment : Fragment() {
         // associate the adapter with the RecyclerView.
          binding.scoreList.adapter = adapter
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         binding.backBtn.setOnClickListener { view: View ->
             view.findNavController().navigate(R.id.action_scoreboardFragment_to_menuFragment)

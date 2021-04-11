@@ -14,7 +14,7 @@ import com.whayway.beerrandom.data.ScoreDatabase
 import com.whayway.beerrandom.databinding.FragmentMydialogBinding
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
 
-class MyDialog: DialogFragment() {
+class MyDialogFragment: DialogFragment() {
     //todo change usage of binding like here
     private var _binding: FragmentMydialogBinding? = null
 
@@ -27,7 +27,7 @@ class MyDialog: DialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMydialogBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -49,11 +49,12 @@ class MyDialog: DialogFragment() {
         //sleepQualityViewModel = sleepQualityViewModel
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
+        val score = args.score
 
-        binding.scoreViewMydialog.text = "Score " +args.score.toString()
+        binding.scoreViewMydialog.text = getString(R.string.score_msg, "$score")
 
 
-        view?.findViewById<Button>(R.id.btn_follow)?.setOnClickListener {
+        view.findViewById<Button>(R.id.btn_follow)?.setOnClickListener {
             val edit = binding.editText.text.toString()
             if(edit==""){
                 showPopUp()
@@ -62,17 +63,13 @@ class MyDialog: DialogFragment() {
                 sleepQualityViewModel.saveScore(args.score, edit)
                 sleepQualityViewModel.onStop()
                 findNavController().navigate (
-                    MyDialogDirections.actionMyDialogToResultFragment(
+                    MyDialogFragmentDirections.actionMyDialogToResultFragment(
                         args.score
                     )
                 )
             }
 
         }
-      /*  view?.findViewById<TextView>(R.id.txt_close_view)?.setOnClickListener {
-
-        }*/
-
     }
 
     private fun showPopUp() {
