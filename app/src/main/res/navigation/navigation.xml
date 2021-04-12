@@ -35,11 +35,11 @@
             android:name="score"
             app:argType="integer" />
         <action
-            android:id="@+id/action_resultFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
-        <action
             android:id="@+id/action_resultFragment_to_menuFragment"
             app:destination="@id/menuFragment" />
+        <action
+            android:id="@+id/action_resultFragment_to_levelFragment"
+            app:destination="@id/levelFragment" />
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
@@ -77,8 +77,5 @@
         <action
             android:id="@+id/action_levelFragment_to_gameFragment"
             app:destination="@id/gameFragment" />
-        <argument
-            android:name="levelTime"
-            android:defaultValue="5000" />
     </fragment>
 </navigation>

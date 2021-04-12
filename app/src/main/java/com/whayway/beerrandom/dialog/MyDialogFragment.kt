@@ -1,5 +1,6 @@
 package com.whayway.beerrandom.dialog
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreDatabase
 import com.whayway.beerrandom.databinding.FragmentMydialogBinding
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
-
 class MyDialogFragment: DialogFragment() {
     //todo change usage of binding like here
     private var _binding: FragmentMydialogBinding? = null
@@ -60,7 +60,7 @@ class MyDialogFragment: DialogFragment() {
                 showPopUp()
             }else{
                 //todo maybe add Loading Spinner?
-                sleepQualityViewModel.saveScore(args.score, edit)
+                sleepQualityViewModel.saveScore(args.score, edit, getPreferences())
               //  sleepQualityViewModel.onStop()
                 findNavController().navigate (
                     MyDialogFragmentDirections.actionMyDialogToResultFragment(
@@ -88,6 +88,11 @@ class MyDialogFragment: DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private  fun getPreferences(): String{
+        val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
+        return sharedPreferences?.getString(getString(R.string.difficulty_key), "Easy")!!
     }
 
 

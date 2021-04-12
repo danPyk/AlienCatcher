@@ -35,8 +35,6 @@ class   ScoreBoardAdapter(): RecyclerView.Adapter<ScoreBoardAdapter.ViewHolder>(
         return data.size
     }
 
-
-
     //viewType parameter is used when there are multiple views in the same RecyclerView
     // parent parameter, which is the view group that holds the view holder, is always the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -56,6 +54,7 @@ class   ScoreBoardAdapter(): RecyclerView.Adapter<ScoreBoardAdapter.ViewHolder>(
         private val scoreNameTextView: TextView = itemView.findViewById(R.id.name_view)
         private val scoreResultTextView: TextView = itemView.findViewById(R.id.score_view)
         private val scoreIdTextView: TextView = itemView.findViewById(R.id.id_view)
+        private val difficultyTextView: TextView = itemView.findViewById(R.id.difficulty_view)
         //fun extracted from onBindVIewHolder to separate logic
 
         fun bind(
@@ -67,7 +66,7 @@ class   ScoreBoardAdapter(): RecyclerView.Adapter<ScoreBoardAdapter.ViewHolder>(
             scoreNameTextView.text = item.score_name
             scoreResultTextView.text = item.score_points.toString()
             scoreIdTextView.text = item.scoreId.toString()
-
+            difficultyTextView.text = item.difficulty_level
         }
     /*    private fun ViewHolder.bind(item: ScoreBoard){
 

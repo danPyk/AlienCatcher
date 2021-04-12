@@ -10,18 +10,20 @@ import kotlinx.coroutines.launch
 
 class MyDialogViewModel(private val database: ScoreBoardDao) : ViewModel() {
 
+    //todo
      private var  timeSpend = MutableLiveData<ScoreBoard>()
 
     init {
 
     }
 
-    fun saveScore(score: Int, name: String) {
+    fun saveScore(score: Int, name: String, difficulty: String) {
         // launch a coroutine in the viewModelScope
         viewModelScope.launch(Dispatchers.IO) {
             val newScore = ScoreBoard()
             newScore.score_points = score
             newScore.score_name = name
+            newScore.difficulty_level = difficulty
 
             insert(newScore)
 

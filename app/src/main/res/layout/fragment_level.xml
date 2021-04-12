@@ -4,20 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
 
     tools:context=".level.LevelFragment">
+  <data>
+    <variable name="level" type="com.whayway.beerrandom.level.LevelViewModel"/>
+  </data>
+
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
     <RadioGroup
         android:id="@+id/radioGroup"
-        android:layout_width="349dp"
-        android:layout_height="126dp"
+        android:layout_width="223dp"
+        android:layout_height="89dp"
+        android:layout_marginBottom="320dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.741"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView3">
+        app:layout_constraintStart_toStartOf="parent">
 
+      <RadioButton
+          android:id="@+id/btn_easy"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/easy"
+        />
+
+      <RadioButton
+          android:id="@+id/btn_medium"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/medium"
+       />
+
+      <RadioButton
+          android:id="@+id/btn_hard"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/hard"
+      />
     </RadioGroup>
 
     <androidx.constraintlayout.widget.Guideline
@@ -38,14 +62,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup"
         app:layout_constraintVertical_bias="0.559" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello"
-        tools:layout_editor_absoluteX="-40dp"
-        tools:layout_editor_absoluteY="-38dp" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

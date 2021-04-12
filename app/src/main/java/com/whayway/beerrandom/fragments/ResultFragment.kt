@@ -13,7 +13,7 @@ import androidx.navigation.findNavController
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentResultBinding
 
-//todo correct back navigation
+//todo correct play again with different level
 class ResultFragment  : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(
@@ -27,7 +27,7 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
 
         binding.playAgainButton.setOnClickListener { view: View ->
             view.findNavController()
-                .navigate(ResultFragmentDirections.actionResultFragmentToGameFragment(5000))
+                .navigate(R.id.levelFragment)
         }
         val args = ResultFragmentArgs.fromBundle(requireArguments())
         if (args.score > 30) {

@@ -48,6 +48,17 @@
         app:layout_constraintHorizontal_bias="0.017"
         app:layout_constraintStart_toEndOf="@+id/id_view" />
 
+    <TextView
+        android:id="@+id/difficulty_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintBottom_toBottomOf="@+id/id_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.673"
+        app:layout_constraintStart_toEndOf="@+id/id_view" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

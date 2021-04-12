@@ -40,11 +40,6 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_instructionFragment_to_gameFragment">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                             <entry key="action_instructionFragment_to_levelFragment">
                               <value>
                                 <LayoutPositions />
@@ -60,8 +55,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-945" />
-                            <option name="y" value="-660" />
+                            <option name="x" value="-918" />
+                            <option name="y" value="-476" />
                           </Point>
                         </option>
                         <option name="myPositions">

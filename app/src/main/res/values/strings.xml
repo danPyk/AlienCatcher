@@ -27,4 +27,10 @@
     <string name="play_again">Play again</string>
     <string name="menu">Menu</string>
     <string name="back">back</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+
+    <string name="difficulty_key">difficulty</string>
+
 </resources>
