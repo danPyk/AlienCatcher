@@ -13,7 +13,6 @@ class MyDialogViewModel(private val database: ScoreBoardDao) : ViewModel() {
      private var  timeSpend = MutableLiveData<ScoreBoard>()
 
     init {
-        initializeTonight()
 
     }
 
@@ -39,25 +38,13 @@ class MyDialogViewModel(private val database: ScoreBoardDao) : ViewModel() {
      *  If the start time and end time are not the same, then we do not have an unfinished
      *  recording.
      */
-    private suspend fun getTonightFromDatabase(): ScoreBoard? {
-        var night = database.getTonight()
-        if (night?.endTimeMilli != night?.startTimeMilli) {
-            night = null
-        }
-        return night
-    }
 
-    private fun initializeTonight() {
-        viewModelScope.launch {
-            timeSpend.value = getTonightFromDatabase()
-        }
-    }
 
     private suspend fun update(night: ScoreBoard) {
         database.update(night)
     }
 
-
+/*
     fun onStop() {
         viewModelScope.launch {
             // In Kotlin, the return@label syntax is used for specifying which function among
@@ -74,6 +61,20 @@ class MyDialogViewModel(private val database: ScoreBoardDao) : ViewModel() {
            // _navigateToSleepQuality.value = oldNight
         }
     }
+*/
+    /*    private suspend fun getTonightFromDatabase(): ScoreBoard? {
+        var night = database.getTonight()
+        if (night?.endTimeMilli != night?.startTimeMilli) {
+            night = null
+        }
+        return night
+    }
+
+    private fun initializeTonight() {
+        viewModelScope.launch {
+            timeSpend.value = getTonightFromDatabase()
+        }
+    }*/
 
 
 

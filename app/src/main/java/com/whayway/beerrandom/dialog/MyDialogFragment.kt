@@ -40,7 +40,7 @@ class MyDialogFragment: DialogFragment() {
         val application = requireNotNull(this.activity).application
 
         val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
-        val viewModelFactory = SleepQualityViewModelFactory( dataSource!!)
+        val viewModelFactory = MyDialogViewModelFactory( dataSource!!)
 
         val sleepQualityViewModel =
             ViewModelProvider(
@@ -61,7 +61,7 @@ class MyDialogFragment: DialogFragment() {
             }else{
                 //todo maybe add Loading Spinner?
                 sleepQualityViewModel.saveScore(args.score, edit)
-                sleepQualityViewModel.onStop()
+              //  sleepQualityViewModel.onStop()
                 findNavController().navigate (
                     MyDialogFragmentDirections.actionMyDialogToResultFragment(
                         args.score

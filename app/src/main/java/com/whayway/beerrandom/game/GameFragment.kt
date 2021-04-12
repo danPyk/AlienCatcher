@@ -3,9 +3,6 @@ package com.whayway.beerrandom.game
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -15,22 +12,21 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentGameBinding
-import com.whayway.beerrandom.dialog.MyDialogFragmentDirections
 import kotlinx.android.synthetic.main.fragment_game.*
-import kotlinx.android.synthetic.main.fragment_result.*
 
 
 class GameFragment : androidx.fragment.app.Fragment() {
     private lateinit var binding: FragmentGameBinding
-    private lateinit var viewModel: GameViewModel
+    //private lateinit var viewModel: GameViewModel
+    val viewModel: GameViewModel by viewModels()
 
     @SuppressLint("StringFormatMatches")
     override fun onCreateView(
@@ -46,8 +42,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
             false
         )
 
-        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-
+        //viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
         object : CountDownTimer(viewModel.gameTime.value!!, 1000) {
              override fun onTick(p0: Long) {
@@ -99,25 +94,25 @@ class GameFragment : androidx.fragment.app.Fragment() {
             imageView3
         )            //todo: add boss
 
-        imageView8.setOnClickListener { imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmatp)
+        imageView8.setOnClickListener { imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmap)
            }
-        imageView7.setOnClickListener { imageViewSrc(imageView7, viewModel.bossBitMap, viewModel.cowBitmatp)
+        imageView7.setOnClickListener { imageViewSrc(imageView7, viewModel.bossBitMap, viewModel.cowBitmap)
           }
-        imageView8.setOnClickListener{  imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmatp)
+        imageView8.setOnClickListener{  imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmap)
           }
-        imageView6.setOnClickListener {  imageViewSrc(imageView6, viewModel.bossBitMap, viewModel.cowBitmatp)
+        imageView6.setOnClickListener {  imageViewSrc(imageView6, viewModel.bossBitMap, viewModel.cowBitmap)
            }
-        imageView5.setOnClickListener {  imageViewSrc(imageView5, viewModel.bossBitMap, viewModel.cowBitmatp)
+        imageView5.setOnClickListener {  imageViewSrc(imageView5, viewModel.bossBitMap, viewModel.cowBitmap)
             }
-        imageView4.setOnClickListener { imageViewSrc(imageView4, viewModel.bossBitMap, viewModel.cowBitmatp)
+        imageView4.setOnClickListener { imageViewSrc(imageView4, viewModel.bossBitMap, viewModel.cowBitmap)
             }
-        imageView3.setOnClickListener { imageViewSrc(imageView3, viewModel.bossBitMap, viewModel.cowBitmatp)
+        imageView3.setOnClickListener { imageViewSrc(imageView3, viewModel.bossBitMap, viewModel.cowBitmap)
          }
         imageViewCow.setOnClickListener {
-            imageViewSrc(imageViewCow, viewModel.bossBitMap, viewModel.cowBitmatp)
+            imageViewSrc(imageViewCow, viewModel.bossBitMap, viewModel.cowBitmap)
         }
 
-        imageView1.setOnClickListener {imageViewSrc(imageView1, viewModel.bossBitMap, viewModel.cowBitmatp)}
+        imageView1.setOnClickListener {imageViewSrc(imageView1, viewModel.bossBitMap, viewModel.cowBitmap)}
 
         super.onViewCreated(view, savedInstanceState)
         //separate views frome data?
@@ -126,14 +121,18 @@ class GameFragment : androidx.fragment.app.Fragment() {
     private fun imageViewSrc(imageView: ImageView, boss: Bitmap?, cow: Bitmap?){
         val drawable = viewModel.toBitmap(imageView.drawable)
 
-        if (drawable.pixelsEqualTo(cow)){
-            updateScoreCow()
-            viewModel.setImage(imageView)
-        }else if (drawable.pixelsEqualTo(boss)){
-            updateScoreBoss()
-            viewModel.setImage(imageView)
-        }else{
-            updateScore()
+        when {
+            drawable.pixelsEqualTo(cow) -> {
+                updateScoreCow()
+                viewModel.setImage(imageView)
+            }
+            drawable.pixelsEqualTo(boss) -> {
+                updateScoreBoss()
+                viewModel.setImage(imageView)
+            }
+            else -> {
+                updateScore()
+            }
         }
     }
 
@@ -179,6 +178,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
         if (!isRecycled) recycle()
     }
     fun Bitmap.toPixels() = IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }
+
 
 
 }

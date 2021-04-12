@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_gameFragment_to_myDialog"
             app:destination="@id/myDialog" />
+        <argument
+            android:name="time"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
@@ -43,8 +46,8 @@
         android:name="com.whayway.beerrandom.fragments.InstructionFragment"
         android:label="InstructionFragment" >
         <action
-            android:id="@+id/action_instructionFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
+            android:id="@+id/action_instructionFragment_to_levelFragment"
+            app:destination="@id/levelFragment" />
     </fragment>
     <fragment
         android:id="@+id/scoreboardFragment"
@@ -66,4 +69,16 @@
             android:name="score"
             app:argType="integer" />
     </dialog>
+    <fragment
+        android:id="@+id/levelFragment"
+        android:name="com.whayway.beerrandom.level.LevelFragment"
+        android:label="level_fragment"
+        tools:layout="@layout/fragment_level" >
+        <action
+            android:id="@+id/action_levelFragment_to_gameFragment"
+            app:destination="@id/gameFragment" />
+        <argument
+            android:name="levelTime"
+            android:defaultValue="5000" />
+    </fragment>
 </navigation>

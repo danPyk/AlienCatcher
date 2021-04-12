@@ -3,7 +3,6 @@ package com.whayway.beerrandom.game
 import android.app.Application
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.view.View
@@ -14,8 +13,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.whayway.beerrandom.R
+import com.whayway.beerrandom.fragments.ResultFragmentArgs
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
-
+//@HiltViewModel
 class GameViewModel(application: Application): AndroidViewModel(application) {
     //list with images
     lateinit var viewList:  ArrayList<ImageView>
@@ -28,6 +29,7 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     val gameTime: LiveData<Long>
         get() = _gameTime
 
+    //al args = ResultFragmentArgs.fromBundle(requireArguments())
 
     var runnable: Runnable = Runnable { }
     var handler: Handler = Handler()
@@ -36,13 +38,12 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
     var bossMarker = ResourcesCompat.getDrawable( getApplication<Application>().resources, R.drawable.shippink_manned, null)
 
     val bossBitMap =  toBitmap(bossMarker!!)
-    val cowBitmatp =  toBitmap(cowMarker!!)
+    val cowBitmap =  toBitmap(cowMarker!!)
 
     init{
         hideImages()
         _score.value = 0
         _gameTime.value = 2000
-
 
     }
     private fun hideImages() {

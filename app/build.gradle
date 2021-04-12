@@ -3,6 +3,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+
 
 android {
     compileSdkVersion 30
@@ -78,6 +81,8 @@ dependencies {
     implementation 'com.google.android.material:material:<version>'
     implementation "androidx.fragment:fragment-ktx:1.1.0"
 
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
 
 

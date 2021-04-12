@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.whayway.beerrandom.data.ScoreBoardDao
 
-class SleepQualityViewModelFactory   ( private val dataSource: ScoreBoardDao)
+class MyDialogViewModelFactory   (private val dataSource: ScoreBoardDao)
 : ViewModelProvider.Factory{
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

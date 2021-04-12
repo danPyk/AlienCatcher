@@ -27,7 +27,7 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
 
         binding.playAgainButton.setOnClickListener { view: View ->
             view.findNavController()
-                .navigate(ResultFragmentDirections.actionResultFragmentToGameFragment())
+                .navigate(ResultFragmentDirections.actionResultFragmentToGameFragment(5000))
         }
         val args = ResultFragmentArgs.fromBundle(requireArguments())
         if (args.score > 30) {

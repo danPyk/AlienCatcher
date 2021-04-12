@@ -4,6 +4,8 @@ buildscript {
         kotlin_version = '1.4.0'
         room_version = '2.2.5'
         coroutine_version = '1.3.7'
+        ext.hilt_version = '2.33-beta'
+
     }
     repositories {
         google()
@@ -14,6 +16,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         def nav_version = "2.3.0"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        ext.hilt_version = '2.33-beta'
+
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
