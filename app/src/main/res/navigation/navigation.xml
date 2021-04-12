@@ -11,7 +11,12 @@
         android:label="GameFragment" >
         <action
             android:id="@+id/action_gameFragment_to_myDialog"
-            app:destination="@id/myDialog" />
+            app:destination="@id/myDialog"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            />
         <argument
             android:name="time"
             app:argType="long" />
@@ -22,10 +27,18 @@
         android:label="MenuFragment" >
         <action
             android:id="@+id/action_menuFragment2_to_entranceFragment2"
-            app:destination="@id/scoreboardFragment" />
+            app:destination="@id/scoreboardFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_menuFragment2_to_instructionFragment"
-            app:destination="@id/instructionFragment" />
+            app:destination="@id/instructionFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
@@ -36,10 +49,18 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_resultFragment_to_menuFragment"
-            app:destination="@id/menuFragment" />
+            app:destination="@id/menuFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_resultFragment_to_levelFragment"
-            app:destination="@id/levelFragment" />
+            app:destination="@id/levelFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/instructionFragment"
@@ -47,7 +68,11 @@
         android:label="InstructionFragment" >
         <action
             android:id="@+id/action_instructionFragment_to_levelFragment"
-            app:destination="@id/levelFragment" />
+            app:destination="@id/levelFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/scoreboardFragment"
@@ -56,7 +81,11 @@
         tools:layout="@layout/fragment_scoreboard" >
         <action
             android:id="@+id/action_scoreboardFragment_to_menuFragment"
-            app:destination="@id/menuFragment" />
+            app:destination="@id/menuFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
     <dialog
         android:id="@+id/myDialog"
@@ -64,7 +93,11 @@
         android:label="MyDialog" >
         <action
             android:id="@+id/action_myDialog_to_resultFragment"
-            app:destination="@id/resultFragment" />
+            app:destination="@id/resultFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
         <argument
             android:name="score"
             app:argType="integer" />
@@ -76,6 +109,10 @@
         tools:layout="@layout/fragment_level" >
         <action
             android:id="@+id/action_levelFragment_to_gameFragment"
-            app:destination="@id/gameFragment" />
+            app:destination="@id/gameFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
     </fragment>
 </navigation>

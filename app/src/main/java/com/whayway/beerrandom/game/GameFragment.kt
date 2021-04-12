@@ -1,5 +1,8 @@
 package com.whayway.beerrandom.game
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
@@ -103,25 +106,40 @@ class GameFragment : androidx.fragment.app.Fragment() {
             imageView3
         )            //todo: add boss
 
-        imageView8.setOnClickListener { imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmap)
-           }
-        imageView7.setOnClickListener { imageViewSrc(imageView7, viewModel.bossBitMap, viewModel.cowBitmap)
-          }
         imageView8.setOnClickListener{  imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmap)
-          }
-        imageView6.setOnClickListener {  imageViewSrc(imageView6, viewModel.bossBitMap, viewModel.cowBitmap)
-           }
-        imageView5.setOnClickListener {  imageViewSrc(imageView5, viewModel.bossBitMap, viewModel.cowBitmap)
-            }
-        imageView4.setOnClickListener { imageViewSrc(imageView4, viewModel.bossBitMap, viewModel.cowBitmap)
-            }
-        imageView3.setOnClickListener { imageViewSrc(imageView3, viewModel.bossBitMap, viewModel.cowBitmap)
-         }
-        imageViewCow.setOnClickListener {
-            imageViewSrc(imageViewCow, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageView6)
+
+        }
+        imageView7.setOnClickListener { imageViewSrc(imageView7, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageView7)
+
         }
 
-        imageView1.setOnClickListener {imageViewSrc(imageView1, viewModel.bossBitMap, viewModel.cowBitmap)}
+        imageView6.setOnClickListener {  imageViewSrc(imageView6, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageView6)
+
+        }
+        imageView5.setOnClickListener {  imageViewSrc(imageView5, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageView5)
+
+        }
+        imageView4.setOnClickListener { imageViewSrc(imageView4, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageView4)
+
+        }
+        imageView3.setOnClickListener { imageViewSrc(imageView3, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageView3)
+
+        }
+        imageViewCow.setOnClickListener {
+            imageViewSrc(imageViewCow, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageViewCow)
+
+        }
+
+        imageView1.setOnClickListener {imageViewSrc(imageView1, viewModel.bossBitMap, viewModel.cowBitmap)
+            fader(imageView1)
+        }
 
         super.onViewCreated(view, savedInstanceState)
         //separate views frome data?
@@ -188,6 +206,31 @@ class GameFragment : androidx.fragment.app.Fragment() {
     }
     fun Bitmap.toPixels() = IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }
 
+    private fun fader(view: ImageView) {
+
+        // Fade the view out to completely transparent and then back to completely opaque
+
+        val animator = ObjectAnimator.ofFloat(view, View.ALPHA, 0f)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.disableViewDuringAnimation(view)
+        animator.start()
+    }
+    private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
+
+        // This extension method listens for start/end events on an animation and disables
+        // the given view for the entirety of that animation.
+
+        addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                view.isEnabled = false
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                view.isEnabled = true
+            }
+        })
+    }
 
 
 }

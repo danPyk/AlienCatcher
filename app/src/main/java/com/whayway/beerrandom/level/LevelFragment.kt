@@ -76,7 +76,7 @@ class LevelFragment : Fragment() {
                     }
                 R.id.btn_hard ->
                     if (checked) {
-                        viewModel._time.value = 15000L
+                        viewModel._time.value = 1000L
 /*
                         saveDifficultyLevel(R.string.difficulty_key, "Hard")
 */

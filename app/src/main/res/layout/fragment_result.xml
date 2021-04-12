@@ -32,34 +32,28 @@
             android:id="@+id/star_view"
             android:layout_width="78dp"
             android:layout_height="76dp"
-            android:layout_marginStart="80dp"
-            android:layout_marginBottom="300dp"
-            app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="160dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/star_view2"
             android:layout_width="78dp"
             android:layout_height="76dp"
-            android:layout_marginStart="12dp"
-            app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
+            android:layout_marginStart="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/star_view"
             app:layout_constraintStart_toEndOf="@+id/star_view"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.375" />
+            app:layout_constraintTop_toTopOf="@+id/star_view" />
 
         <ImageView
             android:id="@+id/star_view3"
             android:layout_width="78dp"
             android:layout_height="76dp"
-            android:layout_marginTop="180dp"
-            app:layout_constraintBottom_toTopOf="@+id/playAgainButton"
+            app:layout_constraintBottom_toBottomOf="@+id/star_view2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.164"
             app:layout_constraintStart_toEndOf="@+id/star_view2"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/star_view2" />
 
         <Button
             android:id="@+id/playAgainButton"

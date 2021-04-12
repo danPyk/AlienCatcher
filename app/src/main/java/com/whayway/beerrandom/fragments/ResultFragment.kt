@@ -1,10 +1,12 @@
 package com.whayway.beerrandom.fragments
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
@@ -16,6 +18,8 @@ import com.whayway.beerrandom.databinding.FragmentResultBinding
 //todo correct play again with different level
 class ResultFragment  : androidx.fragment.app.Fragment() {
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,12 +29,17 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
             inflater, R.layout.fragment_result, container, false
         )
 
+        rotator(binding.starView)
+        rotator(binding.starView2)
+        rotator(binding.starView3)
+
         binding.playAgainButton.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(R.id.levelFragment)
         }
         val args = ResultFragmentArgs.fromBundle(requireArguments())
         if (args.score > 30) {
+
             binding.starView.setImageResource(R.drawable.color_star_6)
             binding.starView2.setImageResource(R.drawable.color_star_6)
             binding.starView3.setImageResource(R.drawable.color_star_6)
@@ -54,6 +63,12 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
         }
         //binding.resultViewModel = resultViewModel
         return binding.root
+    }
+
+    private fun rotator(view: ImageView){
+        val animator = ObjectAnimator.ofFloat(view, View.ROTATION, -360f, 0f)
+        animator.duration = 1000
+        animator.start()
     }
 
 /*    // Creating our Share Intent
