@@ -13,7 +13,7 @@ class LevelViewModel : ViewModel() {
          get() = _time
 
     init{
-        _time.value = 5000L
+        //_time.value = 5000L
     }
 
 }

@@ -1,49 +1,59 @@
 package com.whayway.beerrandom.game
 
-import android.app.Application
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.os.Handler
 import android.view.View
 import android.widget.ImageView
-import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.whayway.beerrandom.R
-import com.whayway.beerrandom.fragments.ResultFragmentArgs
+import com.whayway.beerrandom.level.LevelFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
-//@HiltViewModel
-class GameViewModel(application: Application): AndroidViewModel(application) {
-    //list with images
+import javax.inject.Inject
+
+@HiltViewModel
+class GameViewModel
+@Inject constructor(
+    private val state: SavedStateHandle
+    ): ViewModel() {
+
+    //retrive safe args by hilt
+    val stejt = state.get<Long>("time")
+
     lateinit var viewList:  ArrayList<ImageView>
 
     private var _score = MutableLiveData<Int>()
     val score: LiveData<Int>
          get() = _score
 
-     var  _gameTime =  MutableLiveData<Long>()
+    var  _gameTime =  MutableLiveData<Long>()
     val gameTime: LiveData<Long>
         get() = _gameTime
 
-    //al args = ResultFragmentArgs.fromBundle(requireArguments())
+   //var timeSetByUser = levelFragment.timex
+
+    //val args = ResultFragmentArgs.fromBundle(requireArguments())
 
     var runnable: Runnable = Runnable { }
     var handler: Handler = Handler()
 
-    var cowMarker = ResourcesCompat.getDrawable(getApplication<Application>().resources, R.drawable.shipblue_cowed, null)
-    var bossMarker = ResourcesCompat.getDrawable( getApplication<Application>().resources, R.drawable.shippink_manned, null)
 
-    val bossBitMap =  toBitmap(bossMarker!!)
-    val cowBitmap =  toBitmap(cowMarker!!)
+
+
 
     init{
         hideImages()
         _score.value = 0
-        _gameTime.value = 2000
+       // _gameTime.value = 2000
+       // Log.i(TAG, "GameViewModel $timeSetByUser: ")
 
     }
     private fun hideImages() {
@@ -100,5 +110,31 @@ class GameViewModel(application: Application): AndroidViewModel(application) {
         return bitmap
     }
 
+     fun fader(view: ImageView) {
+
+        // Fade the view out to completely transparent and then back to completely opaque
+
+        val animator = ObjectAnimator.ofFloat(view, View.ALPHA, 0f)
+        animator.repeatCount = 1
+        animator.repeatMode = ObjectAnimator.REVERSE
+        animator.disableViewDuringAnimation(view)
+        animator.start()
+    }
+
+    private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
+
+        // This extension method listens for start/end events on an animation and disables
+        // the given view for the entirety of that animation.
+
+        addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationStart(animation: Animator?) {
+                view.isEnabled = false
+            }
+
+            override fun onAnimationEnd(animation: Animator?) {
+                view.isEnabled = true
+            }
+        })
+    }
 
 }

@@ -1,8 +1,4 @@
 package com.whayway.beerrandom.game
-
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
@@ -15,19 +11,22 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentGameBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_game.*
+import javax.inject.Inject
 
 
 class GameFragment : androidx.fragment.app.Fragment() {
     private lateinit var binding: FragmentGameBinding
+
     //private lateinit var viewModel: GameViewModel
     val viewModel: GameViewModel by viewModels()
 
@@ -37,7 +36,6 @@ class GameFragment : androidx.fragment.app.Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        // Inflate view and obtain an instance of the binding class
         binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_game,
@@ -45,18 +43,15 @@ class GameFragment : androidx.fragment.app.Fragment() {
             false
         )
 
-        //viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
-        var args = GameFragmentArgs.fromBundle(requireArguments())
-        val gameTime = args.time
-
-        object : CountDownTimer(gameTime, 1000) {
-             override fun onTick(p0: Long) {
-                 //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
-                 //create separate binding for this?
+        object : CountDownTimer(viewModel.stejt!!, 1000) {
+            override fun onTick(p0: Long) {
+                //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
+                //create separate binding for this?
                 btn_ok.visibility = View.INVISIBLE
-                 val timeDivided = p0/1000
-                 timeText.text = getString(R.string.time, "$timeDivided")
+                val timeDivided = p0 / 1000
+                timeText.text = getString(R.string.time, "$timeDivided")
             }
+
             override fun onFinish() {
 
                 timeText.text = getString(R.string.time_out)
@@ -70,22 +65,23 @@ class GameFragment : androidx.fragment.app.Fragment() {
             }
         }.start()
 
-        viewModel.score.observe(viewLifecycleOwner,  { newScore ->
+        viewModel.score.observe(viewLifecycleOwner, { newScore ->
             binding.scoreText.text = getString(R.string.score_msg, "$newScore")
-            }
-      )
-        viewModel.gameTime.observe(viewLifecycleOwner, Observer   { newScore ->
-            if(newScore == 0L){
-                findNavController().navigate (
+        }
+        )
+        //when game is finished, mocw to MyDialog
+/*        viewModel.gameTime.observe(viewLifecycleOwner, Observer { newScore ->
+            if (newScore == 0L) {
+                findNavController().navigate(
                     GameFragmentDirections.actionGameFragmentToMyDialog(
-                       viewModel.score.value!!
+                        viewModel.score.value!!
                     )
                 )
             }
         }
-        )
+        )*/
         binding.btnOk.setOnClickListener {
-            findNavController().navigate (
+            findNavController().navigate(
                 GameFragmentDirections.actionGameFragmentToMyDialog(
                     viewModel.score.value!!
                 )
@@ -94,6 +90,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.viewList = arrayListOf(
             imageView8,
@@ -104,48 +101,55 @@ class GameFragment : androidx.fragment.app.Fragment() {
             imageViewCow,
             imageView1,
             imageView3
-        )            //todo: add boss
+        )
+        var cowMarker = ResourcesCompat.getDrawable(resources, R.drawable.shipblue_cowed, null)
+        var bossMarker = ResourcesCompat.getDrawable(resources, R.drawable.shippink_manned, null)
 
-        imageView8.setOnClickListener{  imageViewSrc(imageView8, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageView6)
+        val bossBitMap =  viewModel.toBitmap(bossMarker!!)
+        val cowBitmap =  viewModel.toBitmap(cowMarker!!)
+
+        imageView8.setOnClickListener {
+            imageViewSrc(imageView8, bossBitMap, cowBitmap)
+            viewModel.fader(imageView6)
+        }
+        imageView7.setOnClickListener {
+            imageViewSrc(imageView7, bossBitMap, cowBitmap)
+            viewModel.fader(imageView7)
+        }
+
+        imageView6.setOnClickListener {
+            imageViewSrc(imageView6, bossBitMap, cowBitmap)
+            viewModel.fader(imageView6)
+        }
+        imageView5.setOnClickListener {
+            imageViewSrc(imageView5, bossBitMap, cowBitmap)
+            viewModel.fader(imageView5)
 
         }
-        imageView7.setOnClickListener { imageViewSrc(imageView7, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageView7)
-
+        imageView4.setOnClickListener {
+            imageViewSrc(imageView4, bossBitMap, cowBitmap)
+            viewModel.fader(imageView4)
         }
-
-        imageView6.setOnClickListener {  imageViewSrc(imageView6, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageView6)
-
-        }
-        imageView5.setOnClickListener {  imageViewSrc(imageView5, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageView5)
-
-        }
-        imageView4.setOnClickListener { imageViewSrc(imageView4, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageView4)
-
-        }
-        imageView3.setOnClickListener { imageViewSrc(imageView3, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageView3)
-
+        imageView3.setOnClickListener {
+            imageViewSrc(imageView3, bossBitMap, cowBitmap)
+            viewModel.fader(imageView3)
         }
         imageViewCow.setOnClickListener {
-            imageViewSrc(imageViewCow, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageViewCow)
-
+            imageViewSrc(imageViewCow, bossBitMap, cowBitmap)
+            viewModel.fader(imageViewCow)
         }
 
-        imageView1.setOnClickListener {imageViewSrc(imageView1, viewModel.bossBitMap, viewModel.cowBitmap)
-            fader(imageView1)
+        imageView1.setOnClickListener {
+            imageViewSrc(imageView1, bossBitMap, cowBitmap)
+            viewModel.fader(imageView1)
         }
 
         super.onViewCreated(view, savedInstanceState)
         //separate views frome data?
         setHasOptionsMenu(true)
     }
-    private fun imageViewSrc(imageView: ImageView, boss: Bitmap?, cow: Bitmap?){
+
+    private fun imageViewSrc(imageView: ImageView, boss: Bitmap?, cow: Bitmap?) {
         val drawable = viewModel.toBitmap(imageView.drawable)
 
         when {
@@ -162,75 +166,52 @@ class GameFragment : androidx.fragment.app.Fragment() {
             }
         }
     }
-
+    //I can get rig of that 3 fun, becouse LIveData observes and updates score
+    // binding.scoreText.text = viewModel.score.value.toString()
     private fun updateScore() {
         viewModel.increaseScore()
-            //I can get rig of that, becouse LIveData observes and updates score
-       // binding.scoreText.text = viewModel.score.value.toString()
     }
+
     private fun updateScoreBoss() {
         viewModel.increaseScoreBoss()
     }
+
     private fun updateScoreCow() {
         viewModel.decreaseScore()
     }
 
- //block back btn
- override fun onAttach(context: Context) {
-     super.onAttach(context)
-     object : OnBackPressedCallback(
-         true // default to enabled
-     ) {
-         override fun handleOnBackPressed() {
-             Toast.makeText(context, "handleOnBackPressed", Toast.LENGTH_SHORT).show()
-         }
-     }
-     requireActivity().onBackPressedDispatcher.addCallback(this, true) {
+    //block back btn
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        object : OnBackPressedCallback(
+            true // default to enabled
+        ) {
+            override fun handleOnBackPressed() {
+                Toast.makeText(context, "handleOnBackPressed", Toast.LENGTH_SHORT).show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, true) {
 
-     }
- }
+        }
+    }
 
     //compare pixels of bitmaps
-    fun Bitmap.pixelsEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) = otherBitmap?.let { other ->
-        if (width == other.width && height == other.height) {
-            val res = toPixels().contentEquals(other.toPixels())
-            if (shouldRecycle) {
-                doRecycle().also { otherBitmap.doRecycle() }
-            }
-            res
-        } else false
-    } ?: kotlin.run { false }
+    fun Bitmap.pixelsEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) =
+        otherBitmap?.let { other ->
+            if (width == other.width && height == other.height) {
+                val res = toPixels().contentEquals(other.toPixels())
+                if (shouldRecycle) {
+                    doRecycle().also { otherBitmap.doRecycle() }
+                }
+                res
+            } else false
+        } ?: kotlin.run { false }
 
     fun Bitmap.doRecycle() {
         if (!isRecycled) recycle()
     }
-    fun Bitmap.toPixels() = IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }
 
-    private fun fader(view: ImageView) {
-
-        // Fade the view out to completely transparent and then back to completely opaque
-
-        val animator = ObjectAnimator.ofFloat(view, View.ALPHA, 0f)
-        animator.repeatCount = 1
-        animator.repeatMode = ObjectAnimator.REVERSE
-        animator.disableViewDuringAnimation(view)
-        animator.start()
-    }
-    private fun ObjectAnimator.disableViewDuringAnimation(view: View) {
-
-        // This extension method listens for start/end events on an animation and disables
-        // the given view for the entirety of that animation.
-
-        addListener(object : AnimatorListenerAdapter() {
-            override fun onAnimationStart(animation: Animator?) {
-                view.isEnabled = false
-            }
-
-            override fun onAnimationEnd(animation: Animator?) {
-                view.isEnabled = true
-            }
-        })
-    }
-
+    fun Bitmap.toPixels() =
+        IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }
 
 }

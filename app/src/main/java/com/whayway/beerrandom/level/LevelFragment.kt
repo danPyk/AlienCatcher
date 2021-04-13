@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentLevelBinding
-import kotlinx.android.synthetic.main.fragment_level.view.*
 
 class LevelFragment : Fragment() {
     private lateinit var binding: FragmentLevelBinding
@@ -21,6 +21,7 @@ class LevelFragment : Fragment() {
     private lateinit var viewModel: LevelViewModel
    // val viewModel: LevelViewModel by viewModels()
 
+    var timex: Long = 11L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +32,9 @@ class LevelFragment : Fragment() {
         // Assign the component to a property in the binding class.
         binding.level = viewModel
 
-        viewModel.time.observe(viewLifecycleOwner, {
+        viewModel.time.observe(viewLifecycleOwner, { newTime ->
+            timex = newTime
+
             viewModel.time
         })
         binding.btnEasy.setOnClickListener{
@@ -44,10 +47,16 @@ class LevelFragment : Fragment() {
             onRadioButtonClicked(binding.btnHard)
             }
 
-        binding.btnOkLevel.setOnClickListener {
-            findNavController().navigate (
-                LevelFragmentDirections.actionLevelFragmentToGameFragment(viewModel.time.value!!)
-            )
+         binding.btnOkLevel.setOnClickListener {
+             if(viewModel.time.value == null){
+                 showPopUp()
+             }else{
+                 findNavController().navigate (
+                     LevelFragmentDirections.actionLevelFragmentToGameFragment(viewModel.time.value!!)
+
+                 )
+             }
+
         }
         return binding.root
     }
@@ -61,25 +70,18 @@ class LevelFragment : Fragment() {
                 R.id.btn_easy->
                     if (checked) {
                         viewModel._time.value = 30000L
-/*
                         saveDifficultyLevel(R.string.difficulty_key, "Easy")
-*/
-                       // viewModel.difficulty = "Easy"
                     }
                 R.id.btn_medium->
                     if (checked) {
                         viewModel._time.value = 23000L
-/*
                         saveDifficultyLevel(R.string.difficulty_key, "Medium")
-*/
 
                     }
                 R.id.btn_hard ->
                     if (checked) {
-                        viewModel._time.value = 1000L
-/*
+                        viewModel._time.value = 15000L
                         saveDifficultyLevel(R.string.difficulty_key, "Hard")
-*/
 
                     }
             }
@@ -94,5 +96,19 @@ class LevelFragment : Fragment() {
         }
 
     }
+    private fun showPopUp() {
+        val coordinatorLayout =
+            requireView().findViewById(R.id.level_constraint_layout) as ConstraintLayout
+        try {
+            Snackbar.make(
+                coordinatorLayout,
+                R.string.level_snackbar_message,
+                2500
+            ).show()
+        } catch (e: NullPointerException) {
+
+        }
+    }
+
 
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
 >
 <LinearLayout
-    android:id="@+id/linerar_layout"
+    android:id="@+id/mydialog_linerar_layout"
 
     android:orientation="vertical"
     android:layout_width="350dp"

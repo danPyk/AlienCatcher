@@ -1,5 +1,8 @@
 package com.whayway.beerrandom
 
+import android.widget.LinearLayout
+import com.google.android.material.snackbar.Snackbar
+
 /*
 
 private val ONE_MINUTE_MILLIS = TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES)

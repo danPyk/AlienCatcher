@@ -16,9 +16,7 @@ import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentResultBinding
 
 //todo correct play again with different level
-class ResultFragment  : androidx.fragment.app.Fragment() {
-
-
+class ResultFragment : androidx.fragment.app.Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +30,6 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
         rotator(binding.starView)
         rotator(binding.starView2)
         rotator(binding.starView3)
-
         binding.playAgainButton.setOnClickListener { view: View ->
             view.findNavController()
                 .navigate(R.id.levelFragment)
@@ -65,7 +62,7 @@ class ResultFragment  : androidx.fragment.app.Fragment() {
         return binding.root
     }
 
-    private fun rotator(view: ImageView){
+    private fun rotator(view: ImageView) {
         val animator = ObjectAnimator.ofFloat(view, View.ROTATION, -360f, 0f)
         animator.duration = 1000
         animator.start()

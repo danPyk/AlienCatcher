@@ -4,7 +4,8 @@
     <string name="game_over">Game Over</string>
     <string name="try_again">Try Again?</string>
 
-    <string name="snackbar_message">Set your name first</string>
+    <string name="mydialog_snackbar_message">Set your name first</string>
+    <string name="level_snackbar_message">Set difficulty level first</string>
     <string name="score_msg">Score %s</string>
     <string name="share">Share</string>
     <string name="great_result">Well done!</string>

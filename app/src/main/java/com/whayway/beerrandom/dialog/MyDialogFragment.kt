@@ -5,7 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,8 @@ import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreDatabase
 import com.whayway.beerrandom.databinding.FragmentMydialogBinding
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
-class MyDialogFragment: DialogFragment() {
+
+class MyDialogFragment : DialogFragment() {
     //todo change usage of binding like here
     private var _binding: FragmentMydialogBinding? = null
 
@@ -33,18 +35,18 @@ class MyDialogFragment: DialogFragment() {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val application = requireNotNull(this.activity).application
 
         val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
-        val viewModelFactory = MyDialogViewModelFactory( dataSource!!)
+        val viewModelFactory = MyDialogViewModelFactory(dataSource!!)
 
         val sleepQualityViewModel =
             ViewModelProvider(
-                this, viewModelFactory).get(MyDialogViewModel::class.java)
+                this, viewModelFactory
+            ).get(MyDialogViewModel::class.java)
 
         //sleepQualityViewModel = sleepQualityViewModel
 
@@ -56,13 +58,13 @@ class MyDialogFragment: DialogFragment() {
 
         view.findViewById<Button>(R.id.btn_follow)?.setOnClickListener {
             val edit = binding.editText.text.toString()
-            if(edit==""){
+            if (edit == "") {
                 showPopUp()
-            }else{
+            } else {
                 //todo maybe add Loading Spinner?
                 sleepQualityViewModel.saveScore(args.score, edit, getPreferences())
-              //  sleepQualityViewModel.onStop()
-                findNavController().navigate (
+                //  sleepQualityViewModel.onStop()
+                findNavController().navigate(
                     MyDialogFragmentDirections.actionMyDialogToResultFragment(
                         args.score
                     )
@@ -74,27 +76,27 @@ class MyDialogFragment: DialogFragment() {
 
     private fun showPopUp() {
         val coordinatorLayout =
-            requireView().findViewById(R.id.linerar_layout) as LinearLayout
+            requireView().findViewById(R.id.mydialog_linerar_layout) as LinearLayout
         try {
             Snackbar.make(
                 coordinatorLayout,
-                R.string.snackbar_message,
+                R.string.mydialog_snackbar_message,
                 2500
             ).show()
         } catch (e: NullPointerException) {
 
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    private  fun getPreferences(): String{
+    private fun getPreferences(): String {
         val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
         return sharedPreferences?.getString(getString(R.string.difficulty_key), "Easy")!!
     }
-
 
 
 }
