@@ -1,3 +1,4 @@
+/*
 package com.whayway.beerrandom.scoreboard
 
 
@@ -17,3 +18,4 @@ class ScoreboardViewModelFactory(
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+*/

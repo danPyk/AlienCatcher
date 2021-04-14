@@ -69,18 +69,18 @@ class LevelFragment : Fragment() {
             when (view.id) {
                 R.id.btn_easy->
                     if (checked) {
-                        viewModel._time.value = 30000L
+                        viewModel._time.value = 650L
                         saveDifficultyLevel(R.string.difficulty_key, "Easy")
                     }
                 R.id.btn_medium->
                     if (checked) {
-                        viewModel._time.value = 23000L
+                        viewModel._time.value = 515L
                         saveDifficultyLevel(R.string.difficulty_key, "Medium")
 
                     }
                 R.id.btn_hard ->
                     if (checked) {
-                        viewModel._time.value = 15000L
+                        viewModel._time.value = 350L
                         saveDifficultyLevel(R.string.difficulty_key, "Hard")
 
                     }

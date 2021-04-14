@@ -14,16 +14,13 @@ import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentGameBinding
-import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.android.synthetic.main.fragment_game.*
-import javax.inject.Inject
 
-
+@FragmentScoped
 class GameFragment : androidx.fragment.app.Fragment() {
     private lateinit var binding: FragmentGameBinding
 
@@ -43,7 +40,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
             false
         )
 
-        object : CountDownTimer(viewModel.stejt!!, 1000) {
+        object : CountDownTimer(30000, 1000) {
             override fun onTick(p0: Long) {
                 //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
                 //create separate binding for this?

@@ -16,7 +16,9 @@ class ScoreboardViewModel(dataSource: ScoreBoardDao) : ViewModel() {
 
      private val database = dataSource
 
+/*
     val allResults = database.getAllScores()
+*/
 
 
 }

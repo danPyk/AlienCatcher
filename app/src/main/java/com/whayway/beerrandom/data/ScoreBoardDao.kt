@@ -5,9 +5,13 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @Dao
-interface ScoreBoardDao {
+ interface ScoreBoardDao {
     @Insert
     suspend fun insert(scoreBoard: ScoreBoard)
 

@@ -46,9 +46,6 @@ class GameViewModel
     var handler: Handler = Handler()
 
 
-
-
-
     init{
         hideImages()
         _score.value = 0
@@ -65,7 +62,7 @@ class GameViewModel
                 val random = Random()
                 val index = random.nextInt(8 - 1)
                 viewList[index].visibility = View.VISIBLE
-                handler.postDelayed(runnable, 450)
+                handler.postDelayed(runnable, stejt!!)
             }
         }
         handler.post(runnable)

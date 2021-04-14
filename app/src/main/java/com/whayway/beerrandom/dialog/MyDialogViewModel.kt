@@ -12,6 +12,7 @@ class MyDialogViewModel(private val database: ScoreBoardDao) : ViewModel() {
 
     //todo
      private var  timeSpend = MutableLiveData<ScoreBoard>()
+    val allResults = database.getAllScores()
 
     init {
 

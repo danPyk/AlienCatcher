@@ -15,8 +15,10 @@ import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreDatabase
 import com.whayway.beerrandom.databinding.FragmentMydialogBinding
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class MyDialogFragment : DialogFragment() {
+class MyDialogFragment: DialogFragment() {
     //todo change usage of binding like here
     private var _binding: FragmentMydialogBinding? = null
 
