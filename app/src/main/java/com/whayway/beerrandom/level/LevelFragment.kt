@@ -21,21 +21,21 @@ class LevelFragment : Fragment() {
     private lateinit var viewModel: LevelViewModel
    // val viewModel: LevelViewModel by viewModels()
 
-    var timex: Long = 11L
+    private var timex: Long = 11L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLevelBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(LevelViewModel::class.java)
         // Assign the component to a property in the binding class.
         binding.level = viewModel
 
-        viewModel.time.observe(viewLifecycleOwner, { newTime ->
+        viewModel.difficultyTime.observe(viewLifecycleOwner, { newTime ->
             timex = newTime
 
-            viewModel.time
+            viewModel.difficultyTime
         })
         binding.btnEasy.setOnClickListener{
             onRadioButtonClicked(binding.btnEasy)
@@ -48,11 +48,11 @@ class LevelFragment : Fragment() {
             }
 
          binding.btnOkLevel.setOnClickListener {
-             if(viewModel.time.value == null){
+             if(viewModel.difficultyTime.value == null){
                  showPopUp()
              }else{
                  findNavController().navigate (
-                     LevelFragmentDirections.actionLevelFragmentToGameFragment(viewModel.time.value!!)
+                     LevelFragmentDirections.actionLevelFragmentToGameFragment(viewModel.difficultyTime.value!!)
 
                  )
              }
@@ -69,19 +69,19 @@ class LevelFragment : Fragment() {
             when (view.id) {
                 R.id.btn_easy->
                     if (checked) {
-                        viewModel._time.value = 650L
+                        viewModel._difficultyTime.value = 650L
                         saveDifficultyLevel(R.string.difficulty_key, "Easy")
                     }
                 R.id.btn_medium->
                     if (checked) {
-                        viewModel._time.value = 515L
+                        viewModel._difficultyTime.value = 515L
                         saveDifficultyLevel(R.string.difficulty_key, "Medium")
 
                     }
                 R.id.btn_hard ->
                     if (checked) {
-                        viewModel._time.value = 350L
-                        saveDifficultyLevel(R.string.difficulty_key, "Hard")
+                        viewModel._difficultyTime.value = 350L
+                       saveDifficultyLevel(R.string.difficulty_key, "Hard")
 
                     }
             }

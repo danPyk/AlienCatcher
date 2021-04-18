@@ -61,18 +61,20 @@
 
             <EditText
                 android:id="@+id/edit_text"
+                android:singleLine="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textSize="18sp"
                 android:textColor="@color/white"
-   />
+                android:autofillHints=""
+                android:focusable="true"/>
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_follow"
+        android:id="@+id/btn_ok_mydialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save"

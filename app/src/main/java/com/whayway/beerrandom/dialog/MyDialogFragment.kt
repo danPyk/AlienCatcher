@@ -1,10 +1,15 @@
 package com.whayway.beerrandom.dialog
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
@@ -15,8 +20,6 @@ import com.whayway.beerrandom.R
 import com.whayway.beerrandom.data.ScoreDatabase
 import com.whayway.beerrandom.databinding.FragmentMydialogBinding
 import com.whayway.beerrandom.fragments.ResultFragmentArgs
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 class MyDialogFragment: DialogFragment() {
     //todo change usage of binding like here
@@ -37,6 +40,7 @@ class MyDialogFragment: DialogFragment() {
     }
 
 
+    @SuppressLint("StringFormatMatches")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,7 +49,7 @@ class MyDialogFragment: DialogFragment() {
         val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
         val viewModelFactory = MyDialogViewModelFactory(dataSource!!)
 
-        val sleepQualityViewModel =
+        val myDialogViewModel =
             ViewModelProvider(
                 this, viewModelFactory
             ).get(MyDialogViewModel::class.java)
@@ -53,18 +57,22 @@ class MyDialogFragment: DialogFragment() {
         //sleepQualityViewModel = sleepQualityViewModel
 
         val args = ResultFragmentArgs.fromBundle(requireArguments())
-        val score = args.score
+        val score: Int = args.score
 
         binding.scoreViewMydialog.text = getString(R.string.score_msg, "$score")
+/*      val bool =   binding.editText.requestFocus()
+        val focus = binding.editText.isFocusable*/
+        binding.editText.showKeyboard()
 
 
-        view.findViewById<Button>(R.id.btn_follow)?.setOnClickListener {
+        binding.btnOkMydialog.setOnClickListener {
             val edit = binding.editText.text.toString()
             if (edit == "") {
                 showPopUp()
             } else {
                 //todo maybe add Loading Spinner?
-                sleepQualityViewModel.saveScore(args.score, edit, getPreferences())
+                    binding.btnOkMydialog.hideKeyboard()
+                myDialogViewModel.saveScore(args.score, edit, getPreferences())
                 //  sleepQualityViewModel.onStop()
                 findNavController().navigate(
                     MyDialogFragmentDirections.actionMyDialogToResultFragment(
@@ -73,6 +81,20 @@ class MyDialogFragment: DialogFragment() {
                 )
             }
 
+        }
+        //after press enter moze to another fragment
+        binding.editText.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE ||
+                event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
+                findNavController().navigate(
+                    MyDialogFragmentDirections.actionMyDialogToResultFragment(
+                        args.score
+                    )
+                )
+                true
+            } else {
+                false
+            }
         }
     }
 
@@ -99,6 +121,18 @@ class MyDialogFragment: DialogFragment() {
         val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
         return sharedPreferences?.getString(getString(R.string.difficulty_key), "Easy")!!
     }
+
+
+    fun View.showKeyboard() {
+        val imm = context.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.toggleSoftInput( InputMethodManager.SHOW_FORCED, 0)
+    }
+    private fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+
 
 
 }

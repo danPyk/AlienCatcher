@@ -1,8 +1,12 @@
-package com.whayway.beerrandom
+package com.whayway.beerrandom.utils
 
+import android.app.Activity
+import android.content.Context
+import android.graphics.Bitmap
+import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import com.google.android.material.snackbar.Snackbar
-
+//todo use to add time attack game mode?
 /*
 
 private val ONE_MINUTE_MILLIS = TimeUnit.MILLISECONDS.convert(1, TimeUnit.MINUTES)
@@ -27,4 +31,5 @@ fun convertDurationToFormatted(startTimeMilli: Long, endTimeMilli: Long, res: Re
     }
 }
 
-*/
+*/  fun Bitmap.toPixels() =
+    IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }

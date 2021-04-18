@@ -6,14 +6,11 @@ import androidx.lifecycle.ViewModel
 
 class LevelViewModel : ViewModel() {
 
-    lateinit var difficulty: String
 
-    var _time = MutableLiveData<Long>()
-     val time: LiveData<Long>
-         get() = _time
+    var _difficultyTime = MutableLiveData<Long>()
+     val difficultyTime: LiveData<Long>
+         get() = _difficultyTime
 
-    init{
-        //_time.value = 5000L
-    }
+
 
 }

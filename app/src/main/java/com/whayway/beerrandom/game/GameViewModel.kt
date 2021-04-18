@@ -14,7 +14,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.whayway.beerrandom.R
-import com.whayway.beerrandom.level.LevelFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -22,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class GameViewModel
 @Inject constructor(
-    private val state: SavedStateHandle
+    state: SavedStateHandle
     ): ViewModel() {
 
     //retrive safe args by hilt
@@ -37,10 +36,6 @@ class GameViewModel
     var  _gameTime =  MutableLiveData<Long>()
     val gameTime: LiveData<Long>
         get() = _gameTime
-
-   //var timeSetByUser = levelFragment.timex
-
-    //val args = ResultFragmentArgs.fromBundle(requireArguments())
 
     var runnable: Runnable = Runnable { }
     var handler: Handler = Handler()
@@ -93,10 +88,7 @@ class GameViewModel
      fun decreaseScore() {
          _score.value = (_score.value)?.minus(3)
     }
-    //todo update viewmodel
-    override fun onCleared() {
-        super.onCleared()
-    }
+
     //convert drawable to bitmap
     fun toBitmap(drawable: Drawable): Bitmap {
 

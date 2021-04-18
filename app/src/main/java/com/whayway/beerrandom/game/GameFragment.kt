@@ -19,12 +19,12 @@ import com.whayway.beerrandom.R
 import com.whayway.beerrandom.databinding.FragmentGameBinding
 import dagger.hilt.android.scopes.FragmentScoped
 import kotlinx.android.synthetic.main.fragment_game.*
+import com.whayway.beerrandom.utils.toPixels
 
 @FragmentScoped
 class GameFragment : androidx.fragment.app.Fragment() {
     private lateinit var binding: FragmentGameBinding
 
-    //private lateinit var viewModel: GameViewModel
     val viewModel: GameViewModel by viewModels()
 
     @SuppressLint("StringFormatMatches")
@@ -40,7 +40,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
             false
         )
 
-        object : CountDownTimer(30000, 1000) {
+        object : CountDownTimer(1000, 1000) {
             override fun onTick(p0: Long) {
                 //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
                 //create separate binding for this?
@@ -67,7 +67,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
         }
         )
         //when game is finished, mocw to MyDialog
-/*        viewModel.gameTime.observe(viewLifecycleOwner, Observer { newScore ->
+        viewModel.gameTime.observe(viewLifecycleOwner,  { newScore ->
             if (newScore == 0L) {
                 findNavController().navigate(
                     GameFragmentDirections.actionGameFragmentToMyDialog(
@@ -76,7 +76,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
                 )
             }
         }
-        )*/
+        )
         binding.btnOk.setOnClickListener {
             findNavController().navigate(
                 GameFragmentDirections.actionGameFragmentToMyDialog(
@@ -99,8 +99,8 @@ class GameFragment : androidx.fragment.app.Fragment() {
             imageView1,
             imageView3
         )
-        var cowMarker = ResourcesCompat.getDrawable(resources, R.drawable.shipblue_cowed, null)
-        var bossMarker = ResourcesCompat.getDrawable(resources, R.drawable.shippink_manned, null)
+        val cowMarker = ResourcesCompat.getDrawable(resources, R.drawable.shipblue_cowed, null)
+        val bossMarker = ResourcesCompat.getDrawable(resources, R.drawable.shippink_manned, null)
 
         val bossBitMap =  viewModel.toBitmap(bossMarker!!)
         val cowBitmap =  viewModel.toBitmap(cowMarker!!)
@@ -193,7 +193,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
     }
 
     //compare pixels of bitmaps
-    fun Bitmap.pixelsEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) =
+    private fun Bitmap.pixelsEqualTo(otherBitmap: Bitmap?, shouldRecycle: Boolean = false) =
         otherBitmap?.let { other ->
             if (width == other.width && height == other.height) {
                 val res = toPixels().contentEquals(other.toPixels())
@@ -204,11 +204,10 @@ class GameFragment : androidx.fragment.app.Fragment() {
             } else false
         } ?: kotlin.run { false }
 
-    fun Bitmap.doRecycle() {
+    private fun Bitmap.doRecycle() {
         if (!isRecycled) recycle()
     }
 
-    fun Bitmap.toPixels() =
-        IntArray(width * height).apply { getPixels(this, 0, width, 0, 0, width, height) }
+
 
 }
