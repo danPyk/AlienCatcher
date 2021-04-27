@@ -1,3 +1,4 @@
+/*
 package com.whayway.beerrandom
 
 import androidx.room.Room
@@ -11,15 +12,16 @@ import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 
-import org.junit.Assert.*
 import org.junit.Before
 import java.io.IOException
 
+*/
 /**
  * Instrumented test, which will execute on an Android device.
  *
  * See [testing documentation](http://d.android.com/tools/testing).
- */
+ *//*
+
 
 @RunWith(AndroidJUnit4::class)
 class SleepDatabaseTest {
@@ -37,7 +39,7 @@ class SleepDatabaseTest {
             // Allowing main thread queries, just for testing.
             .allowMainThreadQueries()
             .build()
-        sleepDao = db.sleepDatabaseDao!!
+        sleepDao = db.scoreDatabaseDao!!
     }
     //CLOSE DB
     @After
@@ -55,4 +57,4 @@ class SleepDatabaseTest {
         val tonight = sleepDao.getTonight()
        // assertEquals(tonight?.sleepQuality, -1)
     }
-}
+}*/

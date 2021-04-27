@@ -8,7 +8,7 @@ import androidx.room.RoomDatabase
 @Database(entities = [ScoreBoard::class], version = 17, exportSchema = false )
 abstract class ScoreDatabase : RoomDatabase(){
     //database needs to know about DAO
-    abstract val sleepDatabaseDao: ScoreBoardDao?
+    abstract val scoreDatabaseDao: ScoreBoardDao?
 
     companion object{
         //The INSTANCE variable will keep a reference to the database, once one has been created.

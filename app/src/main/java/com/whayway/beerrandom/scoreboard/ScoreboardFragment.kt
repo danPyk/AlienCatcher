@@ -29,7 +29,7 @@ class ScoreboardFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
+        val dataSource = ScoreDatabase.getInstance(application).scoreDatabaseDao
         val viewModelFactory = ScoreboardViewModelFactory(dataSource!!)
 
         val scoreboardyViewModel =

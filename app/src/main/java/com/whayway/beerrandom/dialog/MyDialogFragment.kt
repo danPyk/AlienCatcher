@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -46,8 +45,8 @@ class MyDialogFragment: DialogFragment() {
 
         val application = requireNotNull(this.activity).application
 
-        val dataSource = ScoreDatabase.getInstance(application).sleepDatabaseDao
-        val viewModelFactory = MyDialogViewModelFactory(dataSource!!)
+        val dataSource = ScoreDatabase.getInstance(application).scoreDatabaseDao
+        val viewModelFactory = MyDialogViewModelFactory(dataSource!!, application)
 
         val myDialogViewModel =
             ViewModelProvider(
@@ -96,6 +95,8 @@ class MyDialogFragment: DialogFragment() {
                 false
             }
         }
+        //todo
+       // myDialogViewModel.callMSG()
     }
 
     private fun showPopUp() {
