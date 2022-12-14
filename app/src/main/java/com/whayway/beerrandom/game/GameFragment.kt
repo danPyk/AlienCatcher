@@ -40,7 +40,7 @@ class GameFragment : androidx.fragment.app.Fragment() {
             false
         )
 
-        object : CountDownTimer(1000, 1000) {
+        object : CountDownTimer(15000, 1000) {
             override fun onTick(p0: Long) {
                 //todo this btn crashing app     java.lang.NullPointerException: btn_ok must not be null
                 //create separate binding for this?
